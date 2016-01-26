@@ -6,6 +6,7 @@ import {QuestionService} from './question.service';
 @Component({
     selector: 'my-survey',
     templateUrl: 'templates/survey.html',
+    styleUrls: ['css/survey.component.css'],
     directives: [QuestionComponent],
     providers: [QuestionService]
 

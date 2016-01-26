@@ -1,9 +1,7 @@
-<nav class="navbar navbar-inverse">
-    <h2 class="navbar-header">CAFE Web Application</h2>
-    <div class="btn-group" role="group" aria-label="Navigation">
-        <button type="button" class="btn btn-secondary" [routerLink]="['About']">About</button>
-        <button type="button" class="btn btn-secondary" [routerLink]="['Survey']">Survey</button>
-    </div>
+<nav class="navbar navbar-light bg-faded">
+    <h2 class="navbar-brand">CAFE Web Application</h2>
+    <button type="button" class="nav-item btn btn-secondary" [routerLink]="['About']">About</button>
+    <button type="button" class="nav-item btn btn-secondary" [routerLink]="['Survey']">Survey</button>
 </nav>
 <div class="container main">
     <router-outlet></router-outlet>

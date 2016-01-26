@@ -1,5 +1,7 @@
 nav button.router-link-active {
-    color: blue;
+    background-color: #5BC0DE;
+    color: #FFF;
+    border-color: #5BC0DE;
 }
 
 div.main {

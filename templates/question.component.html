@@ -1,16 +1,29 @@
-<div *ngIf="question">
-    <h2>{{question.text}}</h2>
-    <div><label>id: </label>{{question.id}}</div>
-    <div [ngSwitch]="question.q_type">
-        <template ngSwitchWhen=text>Text</template>
-        <template ngSwitchWhen=combo>Combo
-            <ul>
-                <li *ngFor="#option of question.options">
-                    {{option}}
-                </li>
-            </ul>
+<div class="card" *ngIf="question">
+    <p class="card-text">{{question.text}}</p>
+    <form [ngSwitch]="question.q_type">
+        <template ngSwitchWhen=text>
+          <fieldset class="form-group">
+            <input type="text" class="form-control" id="question{{question.id}}" placeholder="Placeholder">
+            <small class="text-muted">Some help text.</small>
+          </fieldset>
         </template>
-        <template ngSwitchWhen=bool>Bool</template>
-        <template ngSwitchDefault>Default</template>
-    </div>
+        <template ngSwitchWhen=combo>
+          <fieldset class="form-group">
+              <select class="form-control" id="question{{question.id}}">
+                <option *ngFor="#option of question.options">
+                    {{option}}
+                </option>
+            </select>
+          </fieldset>
+        </template>
+        <template ngSwitchWhen=bool>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">Yes
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">No 
+            </label>
+        </template>
+        <template ngSwitchDefault>Unknown Question Type</template>
+    </form>
 </div>
