@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core', './question.component', './question.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,23 +8,34 @@ System.register(['angular2/core'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, question_component_1, question_service_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (question_component_1_1) {
+                question_component_1 = question_component_1_1;
+            },
+            function (question_service_1_1) {
+                question_service_1 = question_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(_questionService) {
+                    var _this = this;
+                    this._questionService = _questionService;
+                    this.questions = _questionService.getQuestions().then(function (questions) { return _this.questions = questions; });
                 }
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'cafe-app',
-                        template: '<h2>Hello World!</h2>'
+                        templateUrl: 'templates/app.html',
+                        directives: [question_component_1.QuestionComponent],
+                        providers: [question_service_1.QuestionService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [question_service_1.QuestionService])
                 ], AppComponent);
                 return AppComponent;
             })();
