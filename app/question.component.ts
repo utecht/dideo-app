@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Question, QTypes} from './question';
+import {Question} from './question';
 
 @Component({
     selector: 'my-question',
@@ -10,5 +10,4 @@ import {Question, QTypes} from './question';
 
 export class QuestionComponent {
     public question: Question;
-
 }

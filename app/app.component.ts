@@ -1,18 +1,17 @@
 import {Component} from 'angular2/core';
-import {Question} from './question';
-import {QuestionComponent} from './question.component';
-import {QuestionService} from './question.service';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {SurveyComponent} from './survey.component';
 
 @Component({
     selector: 'cafe-app',
     templateUrl: 'templates/app.html',
-    directives: [QuestionComponent],
-    providers: [QuestionService]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [ROUTER_PROVIDERS]
 
 })
 
-export class AppComponent { 
-    constructor(private _questionService: QuestionService){
-        this.questions = _questionService.getQuestions().then(questions => this.questions = questions);
-    }
-}
+@RouteConfig([
+    {path: '/survey', name: 'Survey', component: SurveyComponent, useAsDefault: true}
+])
+
+export class AppComponent { }

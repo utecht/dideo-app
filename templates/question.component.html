@@ -1,4 +1,16 @@
 <div *ngIf="question">
     <h2>{{question.text}}</h2>
     <div><label>id: </label>{{question.id}}</div>
+    <div [ngSwitch]="question.q_type">
+        <template ngSwitchWhen=text>Text</template>
+        <template ngSwitchWhen=combo>Combo
+            <ul>
+                <li *ngFor="#option of question.options">
+                    {{option}}
+                </li>
+            </ul>
+        </template>
+        <template ngSwitchWhen=bool>Bool</template>
+        <template ngSwitchDefault>Default</template>
+    </div>
 </div>

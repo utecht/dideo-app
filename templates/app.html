@@ -1,6 +1,5 @@
 <h2>Hello World</h2>
-<ul class="questions">
-    <li *ngFor="#question of questions">
-        <my-question [question]="question"></my-question>
-    </li>
-</ul>
+<nav>
+    <a [routerLink]="['Survey']">Survey</a>
+</nav>
+<router-outlet></router-outlet>

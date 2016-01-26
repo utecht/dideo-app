@@ -1,4 +1,4 @@
-System.register(['angular2/core', './question.component', './question.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './survey.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,34 +8,34 @@ System.register(['angular2/core', './question.component', './question.service'],
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, question_component_1, question_service_1;
+    var core_1, router_1, survey_component_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (question_component_1_1) {
-                question_component_1 = question_component_1_1;
+            function (router_1_1) {
+                router_1 = router_1_1;
             },
-            function (question_service_1_1) {
-                question_service_1 = question_service_1_1;
+            function (survey_component_1_1) {
+                survey_component_1 = survey_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_questionService) {
-                    var _this = this;
-                    this._questionService = _questionService;
-                    this.questions = _questionService.getQuestions().then(function (questions) { return _this.questions = questions; });
+                function AppComponent() {
                 }
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'cafe-app',
                         templateUrl: 'templates/app.html',
-                        directives: [question_component_1.QuestionComponent],
-                        providers: [question_service_1.QuestionService]
-                    }), 
-                    __metadata('design:paramtypes', [question_service_1.QuestionService])
+                        directives: [router_1.ROUTER_DIRECTIVES],
+                        providers: [router_1.ROUTER_PROVIDERS]
+                    }),
+                    router_1.RouteConfig([
+                        { path: '/survey', name: 'Survey', component: survey_component_1.SurveyComponent, useAsDefault: true }
+                    ]), 
+                    __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             })();
