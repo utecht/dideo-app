@@ -10,6 +10,7 @@
         <template ngSwitchWhen=combo>
           <fieldset class="form-group">
               <select class="form-control" id="question{{question.id}}">
+                <option></option>
                 <option *ngFor="#option of question.options">
                     {{option}}
                 </option>
