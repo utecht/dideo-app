@@ -4,7 +4,7 @@ import {Question} from './question';
 @Component({
     selector: 'my-question',
     templateUrl: 'templates/question.component.html',
-    styleUrls: ['templates/question.component.css'],
+    styleUrls: ['css/question.component.css'],
     inputs: ['question']
 })
 

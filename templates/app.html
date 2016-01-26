@@ -1,5 +1,10 @@
-<h2>Hello World</h2>
-<nav>
-    <a [routerLink]="['Survey']">Survey</a>
+<nav class="navbar navbar-inverse">
+    <h2 class="navbar-header">CAFE Web Application</h2>
+    <div class="btn-group" role="group" aria-label="Navigation">
+        <button type="button" class="btn btn-secondary" [routerLink]="['About']">About</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['Survey']">Survey</button>
+    </div>
 </nav>
-<router-outlet></router-outlet>
+<div class="container main">
+    <router-outlet></router-outlet>
+</div>
