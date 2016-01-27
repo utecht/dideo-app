@@ -1,0 +1,6 @@
+<div *ngIf="user">
+  <h3>User Profile</h3>
+  <p>{{user.name}}</p>
+  <button class="btn" (click)="logout()">Logout</button>
+</div>
+<my-login *ngIf="!user"></my-login>

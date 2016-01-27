@@ -3,5 +3,5 @@ export interface Question {
     group: string;
     text: string;
     q_type: string;
-    ?options: string[];
+    options?: string[];
 }

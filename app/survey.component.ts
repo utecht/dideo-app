@@ -12,8 +12,10 @@ import {QuestionService} from './question.service';
 
 })
 
-export class SurveyComponent { 
+export class SurveyComponent {
+    public questions: Question[];
     constructor(private _questionService: QuestionService){
-        this.questions = _questionService.getQuestions().then(questions => this.questions = questions);
+        _questionService.getQuestions()
+            .then(questions => this.questions = questions);
     }
 }
