@@ -15,8 +15,8 @@ export class LoginComponent {
   constructor(private _userService: UserService, private _router: Router){ }
 
   public login(){
-    console.log(this.name);
     this._userService.setUser(this.name);
-    this._router.navigate(['Survey']);
+    // setTimeout here to prevent bug https://github.com/angular/angular/issues/6154
+    setTimeout(() => this._router.navigate(['User']));
   }
 }

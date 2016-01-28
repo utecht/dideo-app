@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {SurveyComponent} from './survey.component';
 import {AboutComponent} from './about.component';
 import {UserComponent} from './user.component';
+import {LoginComponent} from './login.component';
 import {UserService} from './user.service';
 
 
@@ -18,6 +19,7 @@ import {UserService} from './user.service';
 @RouteConfig([
     {path: '/about', name: 'About', component: AboutComponent, useAsDefault: true},
     {path: '/user', name: 'User', component: UserComponent},
+    {path: '/login', name: 'Login', component: LoginComponent},
     {path: '/survey', name: 'Survey', component: SurveyComponent}
 ])
 

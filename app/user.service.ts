@@ -3,7 +3,7 @@ import {User} from './user';
 
 @Injectable()
 export class UserService {
-    public user: User = new User("test");
+    public user: User = null;
 
     getUser(){
       return this.user;
