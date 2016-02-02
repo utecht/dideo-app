@@ -8,7 +8,6 @@ import {QuestionService} from './question.service';
     templateUrl: 'templates/category.html',
     styleUrls: ['css/category.css'],
     directives: [QuestionComponent],
-    providers: [QuestionService],
     inputs: ['category']
 
 })
@@ -16,7 +15,7 @@ import {QuestionService} from './question.service';
 export class CategoryComponent implements OnChanges {
     public category: string;
     public questions: Question[];
-    constructor(private _questionService: QuestionService) { }
+    constructor(private _questionService: QuestionService){ } 
 
     ngOnChanges() {
         this._questionService.getQuestions(this.category)

@@ -18,10 +18,4 @@ export class QuestionService {
         }
         return Promise.resolve(filtered);
     }
-
-    getQuestion(id: number) {
-        return Promise.resolve(QUESTIONS).then(
-                questions => questions.filter(q => q.id === id)[0]
-        );
-    }
 }

@@ -8,7 +8,6 @@ import {UserService} from './user.service';
     selector: 'my-question',
     templateUrl: 'templates/question.html',
     styleUrls: ['css/question.css'],
-    providers: [QuestionService, UserService],
     inputs: ['question', 'user']
 })
 
@@ -23,10 +22,8 @@ export class QuestionComponent implements OnInit {
     ngOnInit(){
         this.user = this._userService.getUser();
         if(this.user){
-            console.log('hmm');
-            this.value = this._userService.getValue(this.user, this.question);
+            this.value = this._userService.getValue(this.question);
         } else {
-            console.log('yup');
         }
     }
 }

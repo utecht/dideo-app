@@ -18,11 +18,11 @@ export class UserService {
         this.user = new User(name);
     }
 
-    getValue(user: User, question: Question){
+    getValue(question: Question){
         return 'A';
     }
 
-    setValue(user: User, question: Question){
+    setValue(question: Question){
 
     }
 }
