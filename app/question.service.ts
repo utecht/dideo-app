@@ -10,10 +10,10 @@ export class QuestionService {
     }
 
     getQuestions(category: string){
-        var filtered: Question[];
+        var filtered: Question[] = [];
         for(var i = 0; i < QUESTIONS.length; i++){
             if(QUESTIONS[i].category === category){
-                filtered.append(QUESTIONS[i]);
+                filtered.push(QUESTIONS[i]);
             }
         }
         return Promise.resolve(filtered);

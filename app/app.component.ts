@@ -5,6 +5,7 @@ import {AboutComponent} from './about.component';
 import {UserComponent} from './user.component';
 import {LoginComponent} from './login.component';
 import {UserService} from './user.service';
+import {User} from './user';
 
 
 @Component({
@@ -23,4 +24,6 @@ import {UserService} from './user.service';
     {path: '/questionnaire', name: 'Questionnaire', component: QuestionnaireComponent}
 ])
 
-export class AppComponent { }
+export class AppComponent {
+    public user: User;
+}

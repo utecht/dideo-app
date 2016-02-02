@@ -1,5 +1,5 @@
-{{category}}
-<div class="questions">
+<div *ngIf="category" class="questions">
+    <h3>{{category}}</h3>
     <div *ngFor="#question of questions">
         <my-question [question]="question"></my-question>
     </div>
