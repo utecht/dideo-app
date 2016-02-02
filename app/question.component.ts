@@ -3,8 +3,8 @@ import {Question} from './question';
 
 @Component({
     selector: 'my-question',
-    templateUrl: 'templates/question.component.html',
-    styleUrls: ['css/question.component.css'],
+    templateUrl: 'templates/question.html',
+    styleUrls: ['css/question.css'],
     inputs: ['question']
 })
 
