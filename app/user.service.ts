@@ -7,15 +7,15 @@ export class UserService {
     public user: User = null;
 
     getUser(){
-      return this.user;
+        return this.user;
     }
 
     logout(){
-      this.user = null;
+        this.user = null;
     }
 
     setUser(name: string){
-      this.user = new User(name);
+        this.user = new User(name);
     }
 
     getValue(user: User, question: Question){

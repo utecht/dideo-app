@@ -9,7 +9,7 @@ import {UserService} from './user.service';
     templateUrl: 'templates/question.html',
     styleUrls: ['css/question.css'],
     providers: [QuestionService, UserService],
-    inputs: ['question']
+    inputs: ['question', 'user']
 })
 
 export class QuestionComponent implements OnInit {

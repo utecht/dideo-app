@@ -15,16 +15,16 @@ export class UserComponent implements OnInit {
         private _router: Router){
   }
 
-  ngOnInit(){
-    this.user = this._userService.getUser();
-    if (this.user === null){
+    ngOnInit(){
+        this.user = this._userService.getUser();
+        if (this.user === null){
+            this._router.navigate(['Login']);
+        }
+    }
+
+    logout(){
+        this._userService.logout();
+        this.user = this._userService.getUser();
         this._router.navigate(['Login']);
     }
-  }
-
-  logout(){
-    this._userService.logout();
-    this.user = this._userService.getUser();
-    this._router.navigate(['Login']);
-  }
 }
