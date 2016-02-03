@@ -1,9 +1,9 @@
 <div class="btn-group categories">
     <label class="btn btn-primary"
         *ngFor="#category of categories"
-        [class.active]="category === selectedCategory"
+        [class.active]="category.name === selectedCategory.name"
         (click)="onSelect(category)">
-        {{category}}
+        {{category.name}}
     </label>
 </div>
 <my-category *ngIf="selectedCategory" [category]="selectedCategory"></my-category>

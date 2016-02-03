@@ -8,7 +8,7 @@ import {UserService} from './user.service';
     selector: 'my-question',
     templateUrl: 'templates/question.html',
     styleUrls: ['css/question.css'],
-    inputs: ['question', 'user']
+    inputs: ['question']
 })
 
 export class QuestionComponent implements OnInit {
@@ -25,5 +25,10 @@ export class QuestionComponent implements OnInit {
             this.value = this._userService.getValue(this.question);
         } else {
         }
+    }
+
+    setValue(){
+        console.log('setValue');
+        this._userService.setValue(this.question, this.value);
     }
 }

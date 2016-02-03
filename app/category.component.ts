@@ -1,5 +1,5 @@
 import {Component, OnChanges} from 'angular2/core';
-import {Question} from './question';
+import {Question, Category} from './question';
 import {QuestionComponent} from './question.component';
 import {QuestionService} from './question.service';
 
@@ -13,12 +13,15 @@ import {QuestionService} from './question.service';
 })
 
 export class CategoryComponent implements OnChanges {
-    public category: string;
+    public category: Category;
     public questions: Question[];
+    public errorMessage: any;
+
     constructor(private _questionService: QuestionService){ } 
 
     ngOnChanges() {
-        this._questionService.getQuestions(this.category)
-            .then(questions => this.questions = questions);
+        this._questionService.getQuestions(this.category.id)
+            .subscribe(questions => this.questions = questions,
+                       error => this.errorMessage = <any>error);
     }
 }

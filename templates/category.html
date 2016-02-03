@@ -1,5 +1,6 @@
+<div *ngIf="errorMessage">{{errorMessage}}</div>
 <div *ngIf="category" class="questions">
-    <h3>{{category}}</h3>
+    <h3>{{category.name}}</h3>
     <div *ngFor="#question of questions">
         <my-question [question]="question"></my-question>
     </div>

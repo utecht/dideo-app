@@ -3,16 +3,22 @@
     <form [ngSwitch]="question.q_type">
         <template ngSwitchWhen=text>
           <fieldset class="form-group">
-            <input type="text" class="form-control" id="question{{question.id}}" placeholder="Placeholder" [(ngModel)]="value">
+            <input type="text" class="form-control"
+                   id="question{{question.id}}"
+                   placeholder="Placeholder"
+                   (blur)="setValue()"
+                   [(ngModel)]="value">
             <small class="text-muted">Some help text.</small>
           </fieldset>
         </template>
         <template ngSwitchWhen=combo>
           <fieldset class="form-group">
-              <select class="form-control" id="question{{question.id}}" [(ngModel)]="value">
+              <select class="form-control" id="question{{question.id}}"
+                  (blur)="setValue()"
+                  [(ngModel)]="value">
                 <option></option>
-                <option *ngFor="#option of question.options" [value]="option">
-                    {{option}}
+                <option *ngFor="#option of question.options" [value]="option.text">
+                    {{option.text}}
                 </option>
             </select>
           </fieldset>
@@ -20,12 +26,12 @@
         <template ngSwitchWhen=bool>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
-              (click)="value='yes'"
+              (click)="value='yes'; setValue()"
               [checked]="'yes' === value">Yes
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
-              (click)="value='no'"
+              (click)="value='no'; setValue()"
               [checked]="'no' === value">No 
             </label>
         </template>

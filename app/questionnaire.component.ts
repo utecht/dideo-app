@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {CategoryComponent} from './category.component';
 import {QuestionService} from './question.service';
+import {Category} from './question';
 
 @Component({
     selector: 'my-questionnaire',
@@ -11,14 +12,16 @@ import {QuestionService} from './question.service';
 })
 
 export class QuestionnaireComponent implements OnInit {
-    public categories: string[];
-    public selectedCategory: string;
+    public categories: Category[];
+    public selectedCategory: Category;
+    public errorMessage: any;
 
     constructor(private _questionService: QuestionService){ }
     
     ngOnInit(){
         this._questionService.getCategories()
-            .then(categories => this.setCategories(categories));
+            .subscribe(categories => this.setCategories(categories),
+                       error => this.errorMessage = <any>error);
     }
 
     setCategories(categories){
@@ -28,7 +31,7 @@ export class QuestionnaireComponent implements OnInit {
         }
     }
 
-    onSelect(category: string) {
+    onSelect(category: Category) {
         this.selectedCategory = category;
     }
 }
