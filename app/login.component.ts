@@ -11,12 +11,16 @@ import {Router} from 'angular2/router';
 export class LoginComponent {
   public name: string;
   public password: string;
+  public errorMessage: any;
 
   constructor(private _userService: UserService, private _router: Router){ }
 
   public login(){
-    this._userService.setUser(this.name);
+    this._userService.login(this.name, this.password)
+                        .subscribe(
+                                res => this._router.navigate(['User']),
+                                error => this.errorMessage = <any> error);
     // setTimeout here to prevent bug https://github.com/angular/angular/issues/6154
-    setTimeout(() => this._router.navigate(['User']));
+    // setTimeout(() => this._router.navigate(['User']));
   }
 }

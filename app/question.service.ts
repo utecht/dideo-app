@@ -1,7 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Question, Category, Answer} from './question';
 import {User} from './user';
-import {CATEGORIES} from './mock-categories';
 import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
@@ -31,16 +30,15 @@ export class QuestionService {
     setValue(answer: Answer, user: User){
         console.log(user);
         if(user){
-            answer.user = user.id;
-            console.log('made it');
+            console.log(answer);
             let body = JSON.stringify(answer);
-            let headers = new Headers({'Content-Type': 'application/json'});
+            let headers = new Headers({'Content-Type': 'application/json',
+                                       'Authentication': 'Token ' + user.token });
             let options = new RequestOptions({headers: headers});
         
             return this._http.post(this._answerUrl, body, options)
                           .map(res => <Answer> res.json().results)
                           .catch(this.handleError);
-
         }
     }
 

@@ -14,17 +14,22 @@ import {UserService} from './user.service';
 export class QuestionComponent implements OnInit {
     public question: Question;
     public answer: Answer;
-    public value: string;
 
     constructor(private _questionService: QuestionService,
                 private _userService: UserService) { }
 
     ngOnInit(){
-        this.answer = this.question.answer;
+        if(this.question.answer.length > 0){
+            this.answer = this.question.answer[0];
+        } else {
+            this.answer = {'question': this.question.id};
+        }
     }
 
     setValue(){
         this.answer.question = this.question.id;
-        this._questionService.setValue(this.answer, this._userService.getUser());
+        this._questionService.setValue(this.answer, this._userService.getUser())
+                    .subscribe(res => console.log(res),
+                               error => console.error(error));
     }
 }

@@ -1,8 +1,8 @@
 export class User {
     name: string;
-    id: number;
-    constructor(name: string){
+    token: string;
+    constructor(name: string, token: string){
       this.name = name;
-      this.id = 1;
+      this.token = token;
     }
 }

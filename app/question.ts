@@ -4,6 +4,7 @@ export interface Question {
     text: string;
     q_type: string;
     options?: Opt[];
+    answer: Answer;
 }
 
 export interface Category {
@@ -18,11 +19,9 @@ export interface Opt {
 }
 
 export interface Answer {
-    id: number;
-    text: string;
-    check: string;
-    number: number;
-    yesno: string;
+    text?: string;
+    check?: string;
+    integer?: number;
+    yesno?: boolean;
     question: number;
-    user: number;
 }
