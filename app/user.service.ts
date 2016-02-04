@@ -21,7 +21,6 @@ export class UserService {
     }
 
     getValue(question: Question){
-        console.log(this._answers);
         return this._answers[question.id];
     }
 

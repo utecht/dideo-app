@@ -1,5 +1,5 @@
-<div class="btn-group categories">
-    <label class="btn btn-primary"
+<div class="categories container">
+    <label class="btn btn-secondary col-sm-3"
         *ngFor="#category of categories"
         [class.active]="category.name === selectedCategory.name"
         (click)="onSelect(category)">

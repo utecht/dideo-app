@@ -16,3 +16,13 @@ export interface Opt {
     text: string;
     free: boolean;
 }
+
+export interface Answer {
+    id: number;
+    text: string;
+    check: string;
+    number: number;
+    yesno: string;
+    question: number;
+    user: number;
+}

@@ -1,5 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-import {Question} from './question';
+import {Question, Answer} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
@@ -13,22 +13,18 @@ import {UserService} from './user.service';
 
 export class QuestionComponent implements OnInit {
     public question: Question;
+    public answer: Answer;
     public value: string;
-    public user: User;
 
     constructor(private _questionService: QuestionService,
                 private _userService: UserService) { }
 
     ngOnInit(){
-        this.user = this._userService.getUser();
-        if(this.user){
-            this.value = this._userService.getValue(this.question);
-        } else {
-        }
+        this.answer = this.question.answer;
     }
 
     setValue(){
-        console.log('setValue');
-        this._userService.setValue(this.question, this.value);
+        this.answer.question = this.question.id;
+        this._questionService.setValue(this.answer, this._userService.getUser());
     }
 }
