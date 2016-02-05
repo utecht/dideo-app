@@ -4,7 +4,9 @@ export interface Question {
     text: string;
     q_type: string;
     options?: Opt[];
-    answer: Answer;
+    answer: Answer[];
+    tags?: string;
+    help_text?: string;
 }
 
 export interface Category {

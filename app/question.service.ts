@@ -28,17 +28,17 @@ export class QuestionService {
     private _answerUrl = '/api/answer/';
 
     setValue(answer: Answer, user: User){
-        console.log(user);
         if(user){
-            console.log(answer);
             let body = JSON.stringify(answer);
             let headers = new Headers({'Content-Type': 'application/json',
-                                       'Authentication': 'Token ' + user.token });
+                                       'Authorization': 'Token ' + user.token });
             let options = new RequestOptions({headers: headers});
         
             return this._http.post(this._answerUrl, body, options)
                           .map(res => <Answer> res.json().results)
                           .catch(this.handleError);
+        } else {
+            return Observable.throw('Must be logged in to submit');
         }
     }
 

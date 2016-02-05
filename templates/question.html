@@ -4,10 +4,19 @@
         <template ngSwitchWhen=text>
           <fieldset class="form-group">
             <input type="text" class="form-control"
-                   placeholder="Placeholder"
+                   placeholder="Text..."
                    (blur)="setValue()"
                    [(ngModel)]="answer.text">
-            <small class="text-muted">Some help text.</small>
+          </fieldset>
+          <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+        </template>
+        <template ngSwitchWhen=int>
+          <fieldset class="form-group">
+            <input type="number" class="form-control"
+                   placeholder="Number"
+                   (blur)="setValue()"
+                   [(ngModel)]="answer.integer">
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
         <template ngSwitchWhen=combo>
@@ -20,19 +29,32 @@
                     {{option.text}}
                 </option>
             </select>
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+          </fieldset>
+        </template>
+        <template ngSwitchWhen=check>
+          <fieldset class="form-group">
+              <div class="checkbox" *ngFor="#option of question.options">
+                  <label>
+                    <input type="checkbox" [value]="option.id">
+                    {{option.text}}
+                </label>
+              </div>
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
         <template ngSwitchWhen=bool>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
-              (click)="answer.yesno=True; setValue()"
+              (click)="answer.yesno=true; setValue()"
               [checked]="answer.yesno">Yes
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
-              (click)="answer.yesno=False; setValue()"
+              (click)="answer.yesno=false; setValue()"
               [checked]="!answer.yesno === False">No 
             </label>
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
         <template ngSwitchDefault>Unknown Question Type</template>
     </form>
