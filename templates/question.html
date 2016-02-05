@@ -52,7 +52,7 @@
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
               (click)="answer.yesno=false; setValue()"
-              [checked]="!answer.yesno === False">No 
+              [checked]="answer.yesno === false">No 
             </label>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
