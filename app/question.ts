@@ -27,3 +27,8 @@ export interface Answer {
     yesno?: boolean;
     question: number;
 }
+
+export interface Definition {
+    word: string;
+    definition: string;
+}

@@ -1,5 +1,5 @@
 <div class="card" *ngIf="question">
-    <p class="card-text">{{question.text}}</p>
+    <p class="card-text">{{question.text | define}}</p>
     <form [ngSwitch]="question.q_type">
         <template ngSwitchWhen=text>
           <fieldset class="form-group">

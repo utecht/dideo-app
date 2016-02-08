@@ -1,17 +1,24 @@
 import {Injectable} from 'angular2/core';
-import {Question, Category, Answer} from './question';
+import {Question, Category, Answer, Definition} from './question';
 import {User} from './user';
 import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class QuestionService {
-    constructor(private _http: Http) { }
+    public defObserver: Observable<Definition[]>;
+    private _definitionUrl = '/api/definitions/';
+
+    constructor(private _http: Http) {
+        this.defObserver = _http.get(this._definitionUrl)
+                            .map(res => <Definition[]> res.json())
+                            .catch(this.handleError)
+                            .share();
+    }
 
     private _categoryUrl = '/api/categories/';
 
     getCategories(){
-        // return Promise.resolve(CATEGORIES);
         return this._http.get(this._categoryUrl)
                             .map(res => <Category[]> res.json().results)
                             .catch(this.handleError);
@@ -40,6 +47,11 @@ export class QuestionService {
         } else {
             return Observable.throw('Must be logged in to submit');
         }
+    }
+
+
+    getDefinitions(){
+        return this.defObserver;
     }
 
     private handleError(error: Response){

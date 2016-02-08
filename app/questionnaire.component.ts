@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {CategoryComponent} from './category.component';
 import {QuestionService} from './question.service';
+import {DefinitionService} from './definition.service';
 import {Category} from './question';
 
 @Component({
@@ -8,7 +9,7 @@ import {Category} from './question';
     templateUrl: 'templates/questionnaire.html',
     styleUrls: ['css/questionnaire.css'],
     directives: [CategoryComponent],
-    providers: [QuestionService]
+    providers: [QuestionService, DefinitionService]
 })
 
 export class QuestionnaireComponent implements OnInit {
