@@ -12,7 +12,6 @@ export class DefinitionPipe implements PipeTransform {
     public errored: boolean = false;
     
     constructor(private _definitionService: DefinitionService){
-        console.log('init')
         _definitionService.getDefinitions()
                 .subscribe(defs => this.definitions = <Definition[]> defs,
                            error => this.errored = true);
@@ -20,7 +19,10 @@ export class DefinitionPipe implements PipeTransform {
     }
 
     transform(value: string, args:string[]):any {
-        if(!this.errored){
+        if(!this.errored && this.definitions){
+            for(let i = 0; i < this.definitions.length; i++){
+                value = value.replace(this.definitions[i].word, this.wrapWord(this.definitions[i]));
+            }
             return value;
         } else {
             return value;
@@ -28,7 +30,12 @@ export class DefinitionPipe implements PipeTransform {
     }
 
     // Wrap DIV around the word
-    wrapWord(){
-
+    wrapWord(definition: Definition){
+        return `<span style="color:red"
+                      data-container="body"
+                      data-toggle="popover"
+                      data-trigger="hover"
+                      data-placement="top"
+                      data-content="${definition.definition}">${definition.word}</span>`;
     }
 }
