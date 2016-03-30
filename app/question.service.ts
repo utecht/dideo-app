@@ -19,7 +19,10 @@ export class QuestionService {
     private _categoryUrl = '/api/categories/';
 
     getCategories(){
-        return this._http.get(this._categoryUrl)
+        let headers = new Headers({'Accept': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._categoryUrl, options)
                             .map(res => <Category[]> res.json().results)
                             .catch(this.handleError);
     }
@@ -27,7 +30,10 @@ export class QuestionService {
     private _questionUrl = '/api/questions/';
 
     getQuestions(category: number){
-        return this._http.get(this._questionUrl + category + '/')
+        let headers = new Headers({'Accept': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+        
+        return this._http.get(this._questionUrl + category + '/', options)
                             .map(res => <Question[]> res.json())
                             .catch(this.handleError);
     }
@@ -38,6 +44,7 @@ export class QuestionService {
         if(user){
             let body = JSON.stringify(answer);
             let headers = new Headers({'Content-Type': 'application/json',
+                                       'Accept': 'application/json',
                                        'Authorization': 'Token ' + user.token });
             let options = new RequestOptions({headers: headers});
         

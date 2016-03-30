@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Definition} from './question';
-import {Http, Response} from 'angular2/http';
+import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -9,7 +9,10 @@ export class DefinitionService {
     private _definitionUrl = '/api/definitions/';
 
     constructor(private _http: Http) {
-        this.defObserver = _http.get(this._definitionUrl)
+        let headers = new Headers({'Accept': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+
+        this.defObserver = _http.get(this._definitionUrl, options)
                             .map(res => <Definition[]> res.json())
                             .catch(this.handleError)
                             .share();
