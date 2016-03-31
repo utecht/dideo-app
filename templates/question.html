@@ -1,4 +1,5 @@
 <div class="card" *ngIf="question">
+    <span>#{{question.id}}</span>
     <p class="card-text" [innerHTML]="question.text | define"></p>
     <form [ngSwitch]="question.q_type">
         <template ngSwitchWhen=text>
