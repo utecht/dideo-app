@@ -7,6 +7,7 @@
             <input type="text" class="form-control"
                    placeholder="Text..."
                    (blur)="setValue()"
+                   [disabled]="question.disabled"
                    [(ngModel)]="answer.text">
           </fieldset>
           <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
@@ -16,6 +17,7 @@
             <input type="number" class="form-control"
                    placeholder="Number"
                    (blur)="setValue()"
+                   [disabled]="question.disabled"
                    [(ngModel)]="answer.integer">
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
@@ -24,6 +26,7 @@
           <fieldset class="form-group">
               <select class="form-control"
                   (blur)="setValue()"
+                   [disabled]="question.disabled"
                   [(ngModel)]="answer.text">
                 <option></option>
                 <option *ngFor="#option of question.options" [value]="option.text">
@@ -37,7 +40,7 @@
           <fieldset class="form-group">
               <div class="checkbox" *ngFor="#option of question.options">
                   <label>
-                    <input type="checkbox" [value]="option.id">
+                    <input type="checkbox" [value]="option.id" [disabled]="question.disabled">
                     {{option.text}}
                 </label>
               </div>
@@ -48,11 +51,13 @@
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
               (click)="answer.yesno=true; setValue()"
+              [disabled]="question.disabled"
               [checked]="answer.yesno">Yes
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
               (click)="answer.yesno=false; setValue()"
+              [disabled]="question.disabled"
               [checked]="answer.yesno === false">No 
             </label>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>

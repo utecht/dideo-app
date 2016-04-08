@@ -29,10 +29,14 @@ export class QuestionService {
 
     private _questionUrl = '/api/questions/';
 
-    getQuestions(category: number){
+    getQuestions(category: number, user: User){
         let headers = new Headers({'Accept': 'application/json'});
+        if(user){
+            headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + user.token });
+        }
         let options = new RequestOptions({headers: headers});
-        
+
         return this._http.get(this._questionUrl + category + '/', options)
                             .map(res => <Question[]> res.json())
                             .catch(this.handleError);
@@ -47,12 +51,10 @@ export class QuestionService {
                                        'Accept': 'application/json',
                                        'Authorization': 'Token ' + user.token });
             let options = new RequestOptions({headers: headers});
-        
+
             return this._http.post(this._answerUrl, body, options)
                           .map(res => <Answer> res.json().results)
                           .catch(this.handleError);
-        } else {
-            return Observable.throw('Must be logged in to submit');
         }
     }
 

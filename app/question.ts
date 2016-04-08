@@ -7,7 +7,7 @@ export interface Question {
     answer: Answer[];
     tags?: string;
     help_text?: string;
-    enabled: boolean;
+    disabled: boolean;
 }
 
 export interface Category {

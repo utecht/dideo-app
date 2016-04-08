@@ -37,9 +37,13 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     }
 
     setValue(){
-        this.answer.question = this.question.id;
-        this._questionService.setValue(this.answer, this._userService.getUser())
-                    .subscribe(res => console.log(res),
-                               error => console.error(error));
+        if(this._userService.getUser()){
+            this.answer.question = this.question.id;
+            this._questionService.setValue(this.answer, this._userService.getUser())
+                        .subscribe(res => console.log(res),
+                                   error => console.error(error));
+         } else {
+             console.log("Must be logged in to submit");
+         }
     }
 }
