@@ -25,4 +25,11 @@ export class CategoryComponent implements OnChanges {
             .subscribe(questions => this.questions = questions,
                        error => this.errorMessage = <any>error);
     }
+
+    checkDeps(e) {
+        console.log("test " + e);
+        for(let i = 0; i < this.questions.length; i++){
+            this.questions[i].disabled = true;
+        }
+    }
 }

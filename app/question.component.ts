@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewChecked} from 'angular2/core';
+import {Component, OnInit, AfterViewChecked, EventEmitter} from 'angular2/core';
 import {Question, Answer} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';
@@ -13,12 +13,14 @@ declare var jQuery:any;
     templateUrl: 'templates/question.html',
     styleUrls: ['css/question.css',],
     inputs: ['question'],
+    outputs: ['changed'],
     pipes: [DefinitionPipe]
 })
 
 export class QuestionComponent implements OnInit, AfterViewChecked {
     public question: Question;
     public answer: Answer;
+    public changed: EventEmitter<any> = new EventEmitter();
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
@@ -42,6 +44,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
             this._questionService.setValue(this.answer, this._userService.getUser())
                         .subscribe(res => console.log(res),
                                    error => console.error(error));
+            this.changed.emit(this.question.id);
          } else {
              console.log("Must be logged in to submit");
          }
