@@ -43,7 +43,7 @@ export class DefinitionPipe implements PipeTransform {
 
     // Wrap DIV around the word
     wrapWord(word: string, definition: string){
-        return `<span style="color:red"
+        return `<span style="font-weight:bold"
                       data-container="body"
                       data-toggle="popover"
                       data-trigger="hover"
