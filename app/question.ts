@@ -8,6 +8,7 @@ export interface Question {
     tags?: string;
     help_text?: string;
     disabled: boolean;
+    graph: boolean;
 }
 
 export interface Category {

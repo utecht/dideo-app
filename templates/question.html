@@ -1,5 +1,6 @@
 <div class="card" *ngIf="question">
     <span>#{{question.id}}</span>
+    <a *ngIf="question.graph" href="/graphs/{{question.id}}.png"><img src="/gicon.png"></a>
     <p class="card-text" [innerHTML]="question.text | define"></p>
     <form [ngSwitch]="question.q_type">
         <template ngSwitchWhen=text>
