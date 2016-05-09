@@ -18,7 +18,7 @@ export class LoginComponent {
   public login(){
     this._userService.login(this.name, this.password)
                         .subscribe(
-                                res => this._router.navigate(['User']),
+                                res => setTimeout(() => this._router.navigate(['User']), 250),
                                 error => this.errorMessage = <any> error);
     // setTimeout here to prevent bug https://github.com/angular/angular/issues/6154
     // setTimeout(() => this._router.navigate(['User']));
