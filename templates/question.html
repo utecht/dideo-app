@@ -1,4 +1,4 @@
-<div class="card" *ngIf="question">
+<div class="card" *ngIf="question" [ngClass]="{disabled: question.disabled}">
     <div *ngIf="user && user.is_staff">
         <span>#{{question.id}}</span>
         <a *ngIf="question.graph" href="/graphs/{{question.id}}.png"><img src="/gicon.png"></a>
@@ -43,7 +43,11 @@
           <fieldset class="form-group">
               <div class="checkbox" *ngFor="#option of question.options">
                   <label>
-                    <input type="checkbox" [value]="option.id" [disabled]="question.disabled">
+                    <input type="checkbox"
+                    (click)="setCheck(option.id)"
+                    [checked]="isChecked(option.id)"
+                    [value]="option.id"
+                    [disabled]="question.disabled">
                     {{option.text}}
                 </label>
               </div>

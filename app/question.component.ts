@@ -40,13 +40,33 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         jQuery('[data-toggle="popover"]').popover();
     }
 
+    setCheck(id: number){
+      if(this.answer.options){
+        this.answer.options.push(id);
+      } else {
+        this.answer.options = [id];
+      }
+      this.setValue();
+    }
+
+    isChecked(id: number){
+      // indexOf returns -1 when item not found
+      if(this.answer.options){
+          return this.answer.options.indexOf(id) > -1;
+      } else {
+          return false;
+      }
+    }
+
     setValue(){
         if(this.user){
             this.answer.question = this.question.id;
-            this._questionService.setValue(this.answer, this._userService.getUser())
+            this._questionService.setValue(this.answer, this.user)
                         .subscribe(res => console.log(res),
                                    error => console.error(error));
-            this.changed.emit(this.question.id);
+            if(this.question.q_type === "bool"){
+                this.changed.emit(this.answer);
+            }
          } else {
              console.log("Must be logged in to submit");
          }

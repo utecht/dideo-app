@@ -25,7 +25,7 @@ export interface Opt {
 
 export interface Answer {
     text?: string;
-    check?: string;
+    options?: number[];
     integer?: number;
     yesno?: boolean;
     question: number;
