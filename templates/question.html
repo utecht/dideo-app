@@ -1,6 +1,8 @@
 <div class="card" *ngIf="question">
-    <span>#{{question.id}}</span>
-    <a *ngIf="question.graph" href="/graphs/{{question.id}}.png"><img src="/gicon.png"></a>
+    <div *ngIf="user && user.is_staff">
+        <span>#{{question.id}}</span>
+        <a *ngIf="question.graph" href="/graphs/{{question.id}}.png"><img src="/gicon.png"></a>
+    </div>
     <p class="card-text" [innerHTML]="question.text | define"></p>
     <form [ngSwitch]="question.q_type">
         <template ngSwitchWhen=text>
@@ -59,7 +61,7 @@
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
               (click)="answer.yesno=false; setValue()"
               [disabled]="question.disabled"
-              [checked]="answer.yesno === false">No 
+              [checked]="answer.yesno === false">No
             </label>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>

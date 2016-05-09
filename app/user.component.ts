@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
     ngOnInit(){
         this.user = this._userService.getUser();
         if (this.user === null){
+            console.log('no user, navigating to login');
             this._router.navigate(['Login']);
         }
     }

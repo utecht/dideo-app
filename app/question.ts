@@ -9,6 +9,7 @@ export interface Question {
     help_text?: string;
     disabled: boolean;
     graph: boolean;
+    depends_on: number[];
 }
 
 export interface Category {

@@ -21,6 +21,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     public question: Question;
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
+    public user: User;
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
@@ -32,6 +33,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         } else {
             this.answer = {'question': this.question.id};
         }
+        this.user = this._userService.getUser();
     }
 
     ngAfterViewChecked(){
@@ -39,7 +41,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     }
 
     setValue(){
-        if(this._userService.getUser()){
+        if(this.user){
             this.answer.question = this.question.id;
             this._questionService.setValue(this.answer, this._userService.getUser())
                         .subscribe(res => console.log(res),

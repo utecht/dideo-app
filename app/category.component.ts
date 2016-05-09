@@ -29,7 +29,12 @@ export class CategoryComponent implements OnChanges {
     checkDeps(e) {
         console.log("test " + e);
         for(let i = 0; i < this.questions.length; i++){
-            this.questions[i].disabled = true;
+            for(let j = 0; j < this.questions[i].depends_on.length; j++){
+                if(this.questions[i].depends_on[j] === e){
+                    this.questions[i].disabled = false;
+                    console.log('disabling ' + j);
+                }
+            }
         }
     }
 }

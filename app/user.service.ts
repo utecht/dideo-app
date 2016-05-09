@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class UserService {
     public user: User = null;
+    public token: string = null;
     private _answers: { [q_id: number]: string } = { };
 
     constructor(private _http: Http) { }
@@ -26,9 +27,13 @@ export class UserService {
         let body = JSON.stringify({'username':username, 'password':password});
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
-    
+
         return this._http.post(this._loginUrl, body, options)
-                      .map(res => this.setUser(username, res.json().token))
+                      .map(res => this.requestUser(res.json().token)
+                                      .subscribe(
+                                        res => this.user = res,
+                                        error => console.error(error)
+                                      ))
                       .catch(this.handleError);
     }
 
@@ -37,9 +42,23 @@ export class UserService {
         return Observable.throw(error.json().error || 'Server Error');
     }
 
-    setUser(username: string, token: string){
-        console.log(token);
-        this.user = new User(username, token);
+    private _userUrl: string = '/api/user/';
+
+    requestUser(token: string){
+        this.token = token;
+        let headers = new Headers({'Accept': 'application/json',
+                                   'Authorization': 'Token ' + token });
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._userUrl, options)
+                          .map(res => this.setUser(<User> res.json(), token))
+                          .catch(this.handleError);
+    }
+
+    setUser(user: User, token: string){
+        user.token = token;
+        this.user = user;
+        return this.user
     }
 
     getValue(question: Question){
