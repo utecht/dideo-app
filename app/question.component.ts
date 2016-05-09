@@ -28,8 +28,8 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
                 private _userService: UserService) { }
 
     ngOnInit(){
-        if(this.question.answer.length > 0){
-            this.answer = this.question.answer[0];
+        if(this.question.answer){
+            this.answer = this.question.answer;
         } else {
             this.answer = {'question': this.question.id};
         }
