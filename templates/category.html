@@ -2,6 +2,6 @@
 <div *ngIf="category" class="questions">
     <h3>{{category.name}}</h3>
     <div *ngFor="#question of questions">
-        <my-question (changed)="checkDeps($event)" [question]="question"></my-question>
+        <my-question (changed)="checkDeps($event)" [chebi]="chebi" [question]="question"></my-question>
     </div>
 </div>

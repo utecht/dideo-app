@@ -2,6 +2,7 @@ import {Component, OnInit} from 'angular2/core';
 import {CategoryComponent} from './category.component';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
+import {ChebiService} from './chebi.service';
 import {Category} from './question';
 
 @Component({
@@ -9,7 +10,7 @@ import {Category} from './question';
     templateUrl: 'templates/questionnaire.html',
     styleUrls: ['css/questionnaire.css'],
     directives: [CategoryComponent],
-    providers: [QuestionService, DefinitionService]
+    providers: [QuestionService, DefinitionService, ChebiService]
 })
 
 export class QuestionnaireComponent implements OnInit {
@@ -18,7 +19,7 @@ export class QuestionnaireComponent implements OnInit {
     public errorMessage: any;
 
     constructor(private _questionService: QuestionService){ }
-    
+
     ngOnInit(){
         this._questionService.getCategories()
             .subscribe(categories => this.setCategories(categories),

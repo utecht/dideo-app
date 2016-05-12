@@ -18,7 +18,8 @@
     "zone.js": "0.5.10",
     "bootstrap": "4.0.0-alpha.2",
     "tether": "1.1.1",
-    "jquery": "2.1.4"
+    "jquery": "2.1.4",
+    "chosen-npm": "1.4.2"
   },
   "devDependencies": {
     "concurrently": "^1.0.0",

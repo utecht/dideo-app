@@ -1,6 +1,7 @@
 import {Component, OnInit, AfterViewChecked, EventEmitter} from 'angular2/core';
 import {Question, Answer} from './question';
 import {User} from './user';
+import {Chebi} from './chebi';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
@@ -12,7 +13,7 @@ declare var jQuery:any;
     selector: 'my-question',
     templateUrl: 'templates/question.html',
     styleUrls: ['css/question.css',],
-    inputs: ['question'],
+    inputs: ['question', 'chebi'],
     outputs: ['changed'],
     pipes: [DefinitionPipe]
 })
@@ -22,6 +23,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
     public user: User;
+    public chebi: Chebi[];
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
@@ -33,11 +35,11 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         } else {
             this.answer = {'question': this.question.id};
         }
-        this.user = this._userService.getUser();
     }
 
     ngAfterViewChecked(){
         jQuery('[data-toggle="popover"]').popover();
+        jQuery('.chosen-select').chosen();
     }
 
     setCheck(id: number){
