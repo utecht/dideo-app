@@ -36,7 +36,7 @@ export class UserComponent implements OnInit {
         if(test === 'True'){
             this._router.navigate(['Questionnaire']);
         } else {
-            this.errorMessage = "Error creating new survey, please contact administrator.";
+            this.errorMessage = "Error creating new survey, please contact administrator.\n" + test;
         }
     }
 
