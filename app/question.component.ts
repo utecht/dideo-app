@@ -35,6 +35,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         } else {
             this.answer = {'question': this.question.id};
         }
+        this.user = this._userService.getUser();
     }
 
     ngAfterViewChecked(){
