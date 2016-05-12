@@ -77,7 +77,7 @@ export class UserService {
                                        'Authorization': 'Token ' + this.token });
             let options = new RequestOptions({headers: headers});
 
-            return this._http.post(this._newSurvey, null, options)
+            return this._http.get(this._newSurvey, options)
                               .map(res => res)
                               .catch(this.handleError);
         }
