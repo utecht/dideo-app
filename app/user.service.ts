@@ -68,4 +68,18 @@ export class UserService {
     setValue(question: Question, value: string){
         this._answers[question.id] = value;
     }
+
+    private _newSurvey: string = '/api/new_survey/';
+
+    newSurvey(){
+        if(this.token){
+            let headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.post(this._newSurvey, null, options)
+                              .map(res => res)
+                              .catch(this.handleError);
+        }
+    }
 }

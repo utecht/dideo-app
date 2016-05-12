@@ -10,6 +10,7 @@ import {Router} from 'angular2/router';
 
 export class UserComponent implements OnInit {
   public user: User;
+  public errorMessage: any;
 
   constructor(private _userService: UserService,
         private _router: Router){
@@ -20,6 +21,22 @@ export class UserComponent implements OnInit {
         if (this.user === null){
             console.log('no user, navigating to login');
             this._router.navigate(['Login']);
+        }
+    }
+
+    newSurvey(){
+        this._userService.newSurvey()
+            .subscribe(
+                res => this.navigateSurvey(res.text()),
+                error => console.error(error)
+            );
+    }
+
+    navigateSurvey(test:any){
+        if(test === 'True'){
+            this._router.navigate(['Questionnaire']);
+        } else {
+            this.errorMessage = "Error creating new survey, please contact administrator.";
         }
     }
 
