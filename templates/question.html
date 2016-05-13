@@ -27,7 +27,7 @@
         </template>
         <template ngSwitchWhen=combo>
           <fieldset class="form-group">
-              <select class="form-control chosen-select"
+              <select class="form-control"
                   (blur)="setValue()"
                    [disabled]="question.disabled"
                   [(ngModel)]="answer.text">
