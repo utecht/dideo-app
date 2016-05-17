@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {User} from './user';
-import {Question} from './question';
+import {Question, Survey} from './question';
 import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
@@ -80,6 +80,64 @@ export class UserService {
             return this._http.get(this._newSurvey, options)
                               .map(res => res)
                               .catch(this.handleError);
+        }
+    }
+
+    private _changeSurvey: string = '/api/change_survey/';
+
+    changeSurvey(id: number){
+        if(this.token){
+            let headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.get(this._changeSurvey + id + '/', options)
+                              .map(res => res)
+                              .catch(this.handleError);
+        }
+    }
+
+    private _surveyUrl = '/api/surveys/';
+
+    getSurveys(user: User){
+        let headers = new Headers({'Accept': 'application/json'});
+        if(user){
+            headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + user.token });
+        }
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._surveyUrl, options)
+                            .map(res => <Survey[]> res.json().results)
+                            .catch(this.handleError);
+    }
+
+    private _currentUrl = '/api/survey/';
+
+    getCurrentSurvey(user: User){
+        let headers = new Headers({'Accept': 'application/json'});
+        if(user){
+            headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + user.token });
+        }
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._currentUrl, options)
+                            .map(res => <Survey> res.json())
+                            .catch(this.handleError);
+    }
+
+    setSurvey(survey: Survey, user: User){
+        if(user){
+            let body = JSON.stringify(survey);
+            let headers = new Headers({'Content-Type': 'application/json',
+                                       'Accept': 'application/json',
+                                       'Authorization': 'Token ' + user.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.post(this._surveyUrl, body, options)
+                          .map(res => <Survey> res.json())
+                          .catch(this.handleError);
         }
     }
 }

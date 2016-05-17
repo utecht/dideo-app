@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Question, Category, Answer, Definition, Survey} from './question';
+import {Question, Category, Answer, Definition} from './question';
 import {User} from './user';
 import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
@@ -42,20 +42,6 @@ export class QuestionService {
                             .catch(this.handleError);
     }
 
-    private _surveyUrl = '/api/surveys/';
-
-    getSurveys(user: User){
-        let headers = new Headers({'Accept': 'application/json'});
-        if(user){
-            headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + user.token });
-        }
-        let options = new RequestOptions({headers: headers});
-
-        return this._http.get(this._surveyUrl, options)
-                            .map(res => <Survey[]> res.json())
-                            .catch(this.handleError);
-    }
     private _answerUrl = '/api/answer/';
 
     setValue(answer: Answer, user: User){
@@ -71,6 +57,7 @@ export class QuestionService {
                           .catch(this.handleError);
         }
     }
+
 
     getDefinitions(){
         return this.defObserver;

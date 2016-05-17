@@ -6,4 +6,11 @@
   <p *ngIf="user.is_staff">Welcome to the staff page</p>
   <button type="button" class="btn" (click)="newSurvey()">New Survey</button>
   <button type="button" class="btn" (click)="logout()">Logout</button>
+  <ul>
+      <li
+        *ngFor="#survey of surveys"
+        [class.current]="current_survey.id === survey.id"
+        (click)="changeSurvey(survey.id)"
+       >{{survey.id}} - {{survey.name}}</li>
+  </ul>
 </div>

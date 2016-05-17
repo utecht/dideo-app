@@ -1,16 +1,20 @@
 import {User} from './user';
+import {Survey} from './question';
 import {Component, OnInit} from 'angular2/core';
 import {UserService} from './user.service';
 import {Router} from 'angular2/router';
 
 @Component ({
   selector: 'my-user',
-  templateUrl: 'templates/user.html'
+  templateUrl: 'templates/user.html',
+  styleUrls: ['css/user.css'],
 })
 
 export class UserComponent implements OnInit {
   public user: User;
   public errorMessage: any;
+  public surveys: Survey[];
+  public current_survey: Survey;
 
   constructor(private _userService: UserService,
         private _router: Router){
@@ -22,6 +26,12 @@ export class UserComponent implements OnInit {
             console.log('no user, navigating to login');
             this._router.navigate(['Login']);
         }
+        this._userService.getCurrentSurvey(this.user)
+            .subscribe(survey => this.current_survey = survey,
+                       error => this.errorMessage = <any>error);
+        this._userService.getSurveys(this.user)
+            .subscribe(surveys => this.surveys = surveys,
+                       error => this.errorMessage = <any>error);
     }
 
     newSurvey(){
@@ -29,6 +39,14 @@ export class UserComponent implements OnInit {
             .subscribe(
                 res => this.navigateSurvey(res.text()),
                 error => console.error(error)
+            );
+    }
+
+    changeSurvey(id: number){
+        this._userService.changeSurvey(id)
+            .subscribe(
+                res => this.navigateSurvey(res.text()),
+                error => this.errorMessage = <any>error
             );
     }
 
