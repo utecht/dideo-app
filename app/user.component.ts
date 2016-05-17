@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
   public user: User;
   public errorMessage: any;
   public surveys: Survey[];
-  public current_survey: Survey;
+  public current_survey: number;
 
   constructor(private _userService: UserService,
         private _router: Router){
@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
             this._router.navigate(['Login']);
         }
         this._userService.getCurrentSurvey(this.user)
-            .subscribe(survey => this.current_survey = survey,
+            .subscribe(survey => this.current_survey = survey.id,
                        error => this.errorMessage = <any>error);
         this._userService.getSurveys(this.user)
             .subscribe(surveys => this.surveys = surveys,
