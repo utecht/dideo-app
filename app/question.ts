@@ -35,3 +35,8 @@ export interface Definition {
     word: string;
     definition: string;
 }
+
+export interface Survey {
+    id: number;
+    name: string;
+}
