@@ -99,11 +99,11 @@ export class UserService {
 
     private _surveyUrl = '/api/surveys/';
 
-    getSurveys(user: User){
+    getSurveys(){
         let headers = new Headers({'Accept': 'application/json'});
-        if(user){
+        if(this.user){
             headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + user.token });
+                                       'Authorization': 'Token ' + this.user.token });
         }
         let options = new RequestOptions({headers: headers});
 
@@ -114,11 +114,11 @@ export class UserService {
 
     private _currentUrl = '/api/survey/';
 
-    getCurrentSurvey(user: User){
+    getCurrentSurvey(){
         let headers = new Headers({'Accept': 'application/json'});
-        if(user){
+        if(this.user){
             headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + user.token });
+                                       'Authorization': 'Token ' + this.user.token });
         }
         let options = new RequestOptions({headers: headers});
 
@@ -127,12 +127,12 @@ export class UserService {
                             .catch(this.handleError);
     }
 
-    setSurvey(survey: Survey, user: User){
-        if(user){
+    setSurvey(survey: Survey){
+        if(this.user){
             let body = JSON.stringify(survey);
             let headers = new Headers({'Content-Type': 'application/json',
                                        'Accept': 'application/json',
-                                       'Authorization': 'Token ' + user.token });
+                                       'Authorization': 'Token ' + this.user.token });
             let options = new RequestOptions({headers: headers});
 
             return this._http.post(this._surveyUrl, body, options)

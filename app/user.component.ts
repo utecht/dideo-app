@@ -26,10 +26,10 @@ export class UserComponent implements OnInit {
             console.log('no user, navigating to login');
             this._router.navigate(['Login']);
         }
-        this._userService.getCurrentSurvey(this.user)
+        this._userService.getCurrentSurvey()
             .subscribe(survey => this.current_survey = survey.id,
                        error => this.errorMessage = <any>error);
-        this._userService.getSurveys(this.user)
+        this._userService.getSurveys()
             .subscribe(surveys => this.surveys = surveys,
                        error => this.errorMessage = <any>error);
     }

@@ -1,9 +1,10 @@
 import {Component, OnInit} from 'angular2/core';
 import {CategoryComponent} from './category.component';
 import {QuestionService} from './question.service';
+import {UserService} from './user.service';
 import {DefinitionService} from './definition.service';
 import {ChebiService} from './chebi.service';
-import {Category} from './question';
+import {Category, Survey} from './question';
 
 @Component({
     selector: 'my-questionnaire',
@@ -17,12 +18,23 @@ export class QuestionnaireComponent implements OnInit {
     public categories: Category[];
     public selectedCategory: Category;
     public errorMessage: any;
+    public survey: Survey;
 
-    constructor(private _questionService: QuestionService){ }
+    constructor(private _questionService: QuestionService,
+                private _userService: UserService){ }
 
     ngOnInit(){
         this._questionService.getCategories()
             .subscribe(categories => this.setCategories(categories),
+                       error => this.errorMessage = <any>error);
+        this._userService.getCurrentSurvey()
+            .subscribe(survey => this.survey = survey,
+                       error => this.errorMessage = <any>error)
+    }
+
+    saveSurvey(){
+        this._userService.setSurvey(this.survey)
+            .subscribe(survey => survey,
                        error => this.errorMessage = <any>error);
     }
 

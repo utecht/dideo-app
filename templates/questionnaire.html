@@ -1,3 +1,8 @@
+<input
+   *ngIf="survey"
+   placeholder="Survey Name..."
+   (blur)="saveSurvey()"
+   [(ngModel)]="survey.name">
 <div class="categories container">
     <label class="btn btn-secondary col-sm-3"
         *ngFor="#category of categories"
