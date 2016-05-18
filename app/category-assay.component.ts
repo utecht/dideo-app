@@ -1,14 +1,14 @@
 import {Component, OnChanges} from '@angular/core';
 import {Question, Category} from './question';
-import {QuestionComponent} from './question.component';
+import {QuestionAssayComponent} from './question-assay.component';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
 
 @Component({
-    selector: 'my-category',
+    selector: 'my-assay-category',
     templateUrl: 'templates/category-assay.html',
     styleUrls: ['css/category.css'],
-    directives: [QuestionComponent],
+    directives: [QuestionAssayComponent],
     inputs: ['category']
 
 })

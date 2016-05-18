@@ -3,13 +3,6 @@
    placeholder="Survey Name..."
    (blur)="saveSurvey()"
    [(ngModel)]="survey.name">
-<div class="categories container">
-    <label class="btn btn-secondary col-sm-3"
-        *ngFor="let category of categories"
-        [class.active]="category.name === selectedCategory.name"
-        (click)="onSelect(category)">
-        {{category.name}}
-    </label>
-</div>
-<my-category *ngIf="selectedCategory" [category]="selectedCategory"></my-category>
+<my-category *ngIf="trialCategory" [category]="trialCategory"></my-category>
 <my-drug-category *ngIf="drugCategory" [category]="drugCategory"></my-drug-category>
+<my-assay-category *ngIf="assayCategory" [category]="assayCategory"></my-assay-category>

@@ -9,7 +9,7 @@ import {DefinitionPipe} from './definition.pipe';
 declare var jQuery:any;
 
 @Component({
-    selector: 'my-question',
+    selector: 'my-assay-question',
     templateUrl: 'templates/question-assay.html',
     styleUrls: ['css/question.css',],
     inputs: ['question'],

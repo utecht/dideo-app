@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryComponent} from './category.component';
 import {CategoryDrugComponent} from './category-drug.component';
+import {CategoryAssayComponent} from './category-assay.component';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
 import {DefinitionService} from './definition.service';
@@ -11,16 +12,17 @@ import {Category, Survey} from './question';
     selector: 'my-questionnaire',
     templateUrl: 'templates/questionnaire.html',
     styleUrls: ['css/questionnaire.css'],
-    directives: [CategoryComponent, CategoryDrugComponent],
+    directives: [CategoryComponent, CategoryDrugComponent, CategoryAssayComponent],
     providers: [QuestionService, DefinitionService, ChebiService]
 })
 
 export class QuestionnaireComponent implements OnInit {
     public categories: Category[];
-    public selectedCategory: Category;
+    public trialCategory: Category;
+    public assayCategory: Category;
+    public drugCategory: Category;
     public errorMessage: any;
     public survey: Survey;
-    public drugCategory: Category;
 
     constructor(private _questionService: QuestionService,
                 private _userService: UserService){ }
@@ -43,16 +45,16 @@ export class QuestionnaireComponent implements OnInit {
     setCategories(categories){
         this.categories = categories;
         if(this.categories && this.categories.length > 0){
-            this.selectedCategory = this.categories[0];
+            this.trialCategory = this.categories[0];
         }
         for(let i = 0; i < categories.length; i++){
             if(categories[i].name === "Drug"){
                 this.drugCategory = categories[i];
+            } else if(categories[i].name === "Assay"){
+                this.assayCategory = categories[i];
+            } else if(categories[i].name === "Trial"){
+                this.trialCategory = categories[i];
             }
         }
-    }
-
-    onSelect(category: Category) {
-        this.selectedCategory = category;
     }
 }

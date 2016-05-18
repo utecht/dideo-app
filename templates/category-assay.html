@@ -1,7 +1,9 @@
 <div *ngIf="errorMessage">{{errorMessage}}</div>
 <div *ngIf="category" class="questions">
     <h3>{{category.name}}</h3>
-    <div *ngFor="let question of questions">
-        <my-question (changed)="checkDeps($event)" [chebi]="chebi" [question]="question"></my-question>
-    </div>
+    <table>
+    <td *ngFor="let question of questions">
+        <my-assay-question (changed)="checkDeps($event)" [question]="question"></my-assay-question>
+    </td>
+    </table>
 </div>
