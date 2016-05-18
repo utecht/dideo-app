@@ -1,9 +1,13 @@
 <div *ngIf="errorMessage">{{errorMessage}}</div>
 <div *ngIf="category" class="questions">
     <h3>{{category.name}}</h3>
-    <table>
-    <td *ngFor="let question of questions">
-        <my-assay-question (changed)="checkDeps($event)" [question]="question"></my-assay-question>
-    </td>
-    </table>
+    <div class="row">
+        <div class="col-xs-4 col-md-3 col-xl-2"
+             style="padding-right:0px;padding-left:0px;"
+             *ngFor="let question of questions">
+            <my-assay-question
+                (changed)="checkDeps($event)"
+                [question]="question"></my-assay-question>
+        </div>
+    </div>
 </div>

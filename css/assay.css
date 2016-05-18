@@ -1,0 +1,13 @@
+.assay {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.assay span {
+    padding: 5px;
+}
+
+.form-group {
+    height: 100%;
+    margin-bottom: 0px;
+}

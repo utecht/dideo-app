@@ -3,6 +3,7 @@
    placeholder="Survey Name..."
    (blur)="saveSurvey()"
    [(ngModel)]="survey.name">
+<div class="row">
 <my-category
     class="col-md-6"
     *ngIf="trialCategory"
@@ -11,7 +12,7 @@
     class="col-md-6"
     *ngIf="drugCategory"
     [category]="drugCategory"></my-drug-category>
+</div>
 <my-assay-category
-    class="row"
     *ngIf="assayCategory"
     [category]="assayCategory"></my-assay-category>

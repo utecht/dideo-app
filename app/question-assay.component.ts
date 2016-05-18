@@ -11,7 +11,7 @@ declare var jQuery:any;
 @Component({
     selector: 'my-assay-question',
     templateUrl: 'templates/question-assay.html',
-    styleUrls: ['css/question.css',],
+    styleUrls: ['css/question.css','css/assay.css'],
     inputs: ['question'],
     outputs: ['changed'],
     pipes: [DefinitionPipe]
