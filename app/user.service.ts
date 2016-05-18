@@ -1,7 +1,7 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {User} from './user';
 import {Question, Survey} from './question';
-import {Http, Response, Headers, RequestOptions} from 'angular2/http';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -38,7 +38,6 @@ export class UserService {
     }
 
     private handleError(error: Response){
-        console.error(error);
         return Observable.throw(error.json().error || 'Server Error');
     }
 

@@ -32,7 +32,7 @@
                    [disabled]="question.disabled"
                   [(ngModel)]="answer.text">
                 <option></option>
-                <option *ngFor="#option of question.options" [value]="option.text">
+                <option *ngFor="let option of question.options" [value]="option.text">
                     {{option.text}}
                 </option>
             </select>
@@ -46,7 +46,7 @@
                    [disabled]="question.disabled"
                   [(ngModel)]="answer.text">
                 <option></option>
-                <option *ngFor="#compound of chebi" [value]="compound.chebi">
+                <option *ngFor="let compound of chebi" [value]="compound.chebi">
                     {{compound.name}}
                 </option>
             </select>
@@ -55,7 +55,7 @@
         </template>
         <template ngSwitchWhen=check>
           <fieldset class="form-group">
-              <div class="checkbox" *ngFor="#option of question.options">
+              <div class="checkbox" *ngFor="let option of question.options">
                   <label>
                     <input type="checkbox"
                     (click)="setCheck(option.id)"

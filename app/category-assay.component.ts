@@ -1,10 +1,8 @@
-import {Component, OnChanges} from 'angular2/core';
+import {Component, OnChanges} from '@angular/core';
 import {Question, Category} from './question';
 import {QuestionComponent} from './question.component';
 import {QuestionService} from './question.service';
-import {ChebiService} from './chebi.service';
 import {UserService} from './user.service';
-import {Chebi} from './chebi';
 
 @Component({
     selector: 'my-category',
@@ -19,18 +17,11 @@ export class CategoryAssayComponent implements OnChanges {
     public category: Category;
     public questions: Question[];
     public errorMessage: any;
-    public chebi: Chebi[];
 
     constructor(private _questionService: QuestionService,
-                private _chebiService: ChebiService,
                 private _userService: UserService){ }
 
-    ngOnInit(){
-        this._chebiService.chebiObserver.subscribe(
-            res => this.chebi = res,
-            error => console.error(error)
-        );
-    }
+    ngOnInit(){ }
 
     ngOnChanges() {
         this._questionService.getQuestions(this.category.id, this._userService.getUser())

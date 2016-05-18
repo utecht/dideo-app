@@ -5,10 +5,11 @@
    [(ngModel)]="survey.name">
 <div class="categories container">
     <label class="btn btn-secondary col-sm-3"
-        *ngFor="#category of categories"
+        *ngFor="let category of categories"
         [class.active]="category.name === selectedCategory.name"
         (click)="onSelect(category)">
         {{category.name}}
     </label>
 </div>
 <my-category *ngIf="selectedCategory" [category]="selectedCategory"></my-category>
+<my-drug-category *ngIf="drugCategory" [category]="drugCategory"></my-drug-category>

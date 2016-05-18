@@ -1,4 +1,4 @@
 export interface Chebi {
-    chebi: string;
+    accession: string;
     name: string;
 }

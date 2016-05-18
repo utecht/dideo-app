@@ -1,21 +1,22 @@
-import {Component, OnInit, AfterViewChecked, EventEmitter} from 'angular2/core';
+import {Component, OnInit, AfterViewChecked, EventEmitter} from '@angular/core';
 import {Question, Answer} from './question';
 import {User} from './user';
 import {Chebi} from './chebi';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
+import {ChebiService} from './chebi.service';
 import {UserService} from './user.service';
 import {DefinitionPipe} from './definition.pipe';
 
 declare var jQuery:any;
 
 @Component({
-    selector: 'my-question',
+    selector: 'my-drug',
     templateUrl: 'templates/question-drug.html',
     styleUrls: ['css/question.css',],
-    inputs: ['question', 'chebi'],
+    inputs: ['question'],
     outputs: ['changed'],
-    pipes: [DefinitionPipe]
+    pipes: [DefinitionPipe],
 })
 
 export class QuestionDrugComponent implements OnInit, AfterViewChecked {
@@ -23,10 +24,12 @@ export class QuestionDrugComponent implements OnInit, AfterViewChecked {
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
     public user: User;
+    public search: string;
     public chebi: Chebi[];
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
+                private _chebiService: ChebiService,
                 private _userService: UserService) { }
 
     ngOnInit(){
@@ -36,11 +39,23 @@ export class QuestionDrugComponent implements OnInit, AfterViewChecked {
             this.answer = {'question': this.question.id};
         }
         this.user = this._userService.getUser();
+        this.checkChebi('(+)');
     }
 
     ngAfterViewChecked(){
         jQuery('[data-toggle="popover"]').popover();
-        jQuery('.chosen-select').chosen();
+    }
+
+    checkChebi(partial: string){
+        this._chebiService.searchChebi(partial)
+            .subscribe(
+                chebi => this.updateChebi(chebi),
+                error => console.error(error)
+            );
+    }
+
+    updateChebi(chebi: Chebi[]){
+        this.chebi = chebi;
     }
 
     setCheck(id: number){

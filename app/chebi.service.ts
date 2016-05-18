@@ -1,18 +1,18 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {Chebi} from './chebi';
-import {Http, Response, Headers, RequestOptions} from 'angular2/http';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ChebiService {
-    public chebiObserver: Observable<Chebi[]>;
-    
-    private _chebiUrl = '/chebi.json';
-    constructor(private _http: Http) {
+    constructor(private _http: Http) { }
+
+    private _chebiUrl = 'api/chebi/';
+    public searchChebi(partial: string){
         let headers = new Headers({'Accept': 'application/json'});
         let options = new RequestOptions({headers: headers});
 
-        this.chebiObserver = _http.get(this._chebiUrl, options)
+        return this._http.get(this._chebiUrl + partial + '/', options)
                             .map(res => <Chebi[]> res.json())
                             .catch(this.handleError);
     }

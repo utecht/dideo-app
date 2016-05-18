@@ -1,8 +1,8 @@
 import {User} from './user';
 import {Survey} from './question';
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from './user.service';
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router';
 
 @Component ({
   selector: 'my-user',
@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
         this.user = this._userService.getUser();
         if (this.user === null){
             console.log('no user, navigating to login');
-            this._router.navigate(['Login']);
+            this._router.navigate(['/login']);
         }
         this._userService.getCurrentSurvey()
             .subscribe(survey => this.current_survey = survey.id,
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
 
     navigateSurvey(test:any){
         if(test === 'true'){
-            this._router.navigate(['Questionnaire']);
+            this._router.navigate(['/questionnaire']);
         } else {
             this.errorMessage = "Error creating new survey, please contact administrator.\n" + test;
         }
@@ -61,6 +61,6 @@ export class UserComponent implements OnInit {
     logout(){
         this._userService.logout();
         this.user = this._userService.getUser();
-        this._router.navigate(['Login']);
+        this._router.navigate(['/login']);
     }
 }
