@@ -3,13 +3,10 @@ import {Question, Answer} from './question';
 import {User} from './user';
 import {Chebi} from './chebi';
 import {QuestionService} from './question.service';
-import {DefinitionService} from './definition.service';
 import {ChebiService} from './chebi.service';
 import {UserService} from './user.service';
 import {DefinitionPipe} from './definition.pipe';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
-
-declare var jQuery:any;
 
 @Component({
     selector: 'my-drug',
@@ -17,11 +14,10 @@ declare var jQuery:any;
     styleUrls: ['css/question.css',],
     inputs: ['question'],
     outputs: ['changed'],
-    pipes: [DefinitionPipe],
     directives: [SELECT_DIRECTIVES]
 })
 
-export class QuestionDrugComponent implements OnInit, AfterViewChecked {
+export class QuestionDrugComponent implements OnInit{
     public question: Question;
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
@@ -31,7 +27,6 @@ export class QuestionDrugComponent implements OnInit, AfterViewChecked {
     public items: Array<any> = [];
 
     constructor(private _questionService: QuestionService,
-                private _definitionService: DefinitionService,
                 private _chebiService: ChebiService,
                 private _userService: UserService) { }
 
@@ -43,10 +38,6 @@ export class QuestionDrugComponent implements OnInit, AfterViewChecked {
         }
         this.user = this._userService.getUser();
         this.checkChebi('(+)');
-    }
-
-    ngAfterViewChecked(){
-        jQuery('[data-toggle="popover"]').popover();
     }
 
     checkChebi(partial: string){
@@ -68,25 +59,8 @@ export class QuestionDrugComponent implements OnInit, AfterViewChecked {
         });
     }
 
-    setCheck(id: number){
-      if(this.answer.options){
-        this.answer.options.push(id);
-      } else {
-        this.answer.options = [id];
-      }
-      this.setValue();
-    }
-
-    isChecked(id: number){
-      // indexOf returns -1 when item not found
-      if(this.answer.options){
-          return this.answer.options.indexOf(id) > -1;
-      } else {
-          return false;
-      }
-    }
-
-    setValue(){
+    setValue(drug: string){
+        this.answer.text = drug;
         if(this.user){
             this.answer.question = this.question.id;
             this._questionService.setValue(this.answer, this.user)
