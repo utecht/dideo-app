@@ -3,6 +3,15 @@
    placeholder="Survey Name..."
    (blur)="saveSurvey()"
    [(ngModel)]="survey.name">
-<my-category *ngIf="trialCategory" [category]="trialCategory"></my-category>
-<my-drug-category *ngIf="drugCategory" [category]="drugCategory"></my-drug-category>
-<my-assay-category *ngIf="assayCategory" [category]="assayCategory"></my-assay-category>
+<my-category
+    class="col-md-6"
+    *ngIf="trialCategory"
+    [category]="trialCategory"></my-category>
+<my-drug-category
+    class="col-md-6"
+    *ngIf="drugCategory"
+    [category]="drugCategory"></my-drug-category>
+<my-assay-category
+    class="row"
+    *ngIf="assayCategory"
+    [category]="assayCategory"></my-assay-category>
