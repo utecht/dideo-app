@@ -25,6 +25,7 @@ export class QuestionDrugComponent implements OnInit{
     public search: string;
     public chebi: Chebi[];
     public items: Array<any> = [];
+    public init: Array<any> = [];
 
     constructor(private _questionService: QuestionService,
                 private _chebiService: ChebiService,
@@ -37,7 +38,8 @@ export class QuestionDrugComponent implements OnInit{
             this.answer = {'question': this.question.id};
         }
         this.user = this._userService.getUser();
-        this.checkChebi('(+)');
+        this.init.push({'id': null, 'text':this.answer.text});
+        this.checkChebi(this.answer.text);
     }
 
     checkChebi(partial: string){

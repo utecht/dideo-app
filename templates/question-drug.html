@@ -10,10 +10,23 @@
                   [disabled]="question.disabled"
                   placeholder="Drug search..."
                   (typed)="checkChebi($event)"
-                  (selected)="setValue($event)"
+                  [initData]="init"
+                  (selected)="setValue($event.text)"
                   [items]="items">
             </ng-select>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
+              (click)="answer.yesno=true; setValue()"
+              [disabled]="question.disabled"
+              [checked]="answer.yesno">Object
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
+              (click)="answer.yesno=false; setValue()"
+              [disabled]="question.disabled"
+              [checked]="answer.yesno === false">Precipitant
+            </label>
           </fieldset>
     </form>
 </div>
