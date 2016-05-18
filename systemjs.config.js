@@ -4,11 +4,13 @@
     'app':                        'app', // 'dist',
     'rxjs':                       'node_modules/rxjs',
     '@angular':                   'node_modules/@angular',
+    'ng2-select':                 'node_modules/ng2-select',
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'boot.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
+    'ng2-select':                       { defaultExtension: 'js' },
   };
   var packageNames = [
     '@angular/common',

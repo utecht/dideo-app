@@ -7,6 +7,7 @@ import {DefinitionService} from './definition.service';
 import {ChebiService} from './chebi.service';
 import {UserService} from './user.service';
 import {DefinitionPipe} from './definition.pipe';
+import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 
 declare var jQuery:any;
 
@@ -17,6 +18,7 @@ declare var jQuery:any;
     inputs: ['question'],
     outputs: ['changed'],
     pipes: [DefinitionPipe],
+    directives: [SELECT_DIRECTIVES]
 })
 
 export class QuestionDrugComponent implements OnInit, AfterViewChecked {
@@ -26,6 +28,7 @@ export class QuestionDrugComponent implements OnInit, AfterViewChecked {
     public user: User;
     public search: string;
     public chebi: Chebi[];
+    public items: Array<any> = [];
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
@@ -56,6 +59,13 @@ export class QuestionDrugComponent implements OnInit, AfterViewChecked {
 
     updateChebi(chebi: Chebi[]){
         this.chebi = chebi;
+        this.items = [];
+        this.chebi.forEach((compound: Chebi) => {
+            this.items.push({
+                id: compound.accession,
+                text: compound.name
+            });
+        });
     }
 
     setCheck(id: number){
