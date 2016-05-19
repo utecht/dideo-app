@@ -7,10 +7,12 @@
   <button type="button" class="btn" (click)="newSurvey()">New Survey</button>
   <button type="button" class="btn" (click)="logout()">Logout</button>
   <ul>
-      <li
-        *ngFor="let survey of surveys"
-        [class.current]="current_survey === survey.id"
-        (click)="changeSurvey(survey.id)"
-       >{{survey.id}} - {{survey.name}}</li>
+      <li *ngFor="let survey of surveys">
+       <span
+        class="label label-pill"
+        [class.label-success]="current_survey === survey.id"
+        [class.label-default]="current_survey !== survey.id"
+        (click)="changeSurvey(survey.id)">
+            {{survey.id}} - {{survey.name}}</span></li>
   </ul>
 </div>
