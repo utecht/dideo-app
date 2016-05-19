@@ -50,6 +50,14 @@ export class UserComponent implements OnInit {
             );
     }
 
+    deleteSurvey(id: number){
+        this._userService.deleteSurvey(id)
+            .subscribe(
+                res => this.ngOnInit(),
+                error => this.errorMessage = <any>error
+            );
+    }
+
     navigateSurvey(test:any){
         if(test === 'true'){
             this._router.navigate(['/questionnaire']);

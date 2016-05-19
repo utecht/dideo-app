@@ -9,6 +9,10 @@
   <ul>
       <li *ngFor="let survey of surveys">
        <span
+        class="label label-pill label-danger"
+        (click)="deleteSurvey(survey.id)">
+            x</span>
+       <span
         class="label label-pill"
         [class.label-success]="current_survey === survey.id"
         [class.label-default]="current_survey !== survey.id"

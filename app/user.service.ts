@@ -96,6 +96,18 @@ export class UserService {
         }
     }
 
+    deleteSurvey(id: number){
+        if(this.token){
+            let headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.delete(this._changeSurvey + id + '/', options)
+                              .map(res => res)
+                              .catch(this.handleError);
+        }
+    }
+
     private _surveyUrl = '/api/surveys/';
 
     getSurveys(){

@@ -7,6 +7,7 @@ import {UserService} from './user.service';
 import {DefinitionService} from './definition.service';
 import {ChebiService} from './chebi.service';
 import {Category, Survey} from './question';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'my-questionnaire',
@@ -25,6 +26,7 @@ export class QuestionnaireComponent implements OnInit {
     public survey: Survey;
 
     constructor(private _questionService: QuestionService,
+                private _router: Router,
                 private _userService: UserService){ }
 
     ngOnInit(){
@@ -40,6 +42,22 @@ export class QuestionnaireComponent implements OnInit {
         this._userService.setSurvey(this.survey)
             .subscribe(survey => survey,
                        error => this.errorMessage = <any>error);
+    }
+
+    newSurvey(){
+        this._userService.newSurvey()
+            .subscribe(
+                res => this.navigateSurvey(res.text()),
+                error => console.error(error)
+            );
+    }
+
+    navigateSurvey(test:any){
+        if(test === 'true'){
+            this.ngOnInit()
+        } else {
+            this.errorMessage = "Error creating new survey, please contact administrator.\n" + test;
+        }
     }
 
     setCategories(categories){

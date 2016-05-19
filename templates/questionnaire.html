@@ -3,6 +3,7 @@
    placeholder="Survey Name..."
    (blur)="saveSurvey()"
    [(ngModel)]="survey.name">
+<button type="button" class="btn" (click)="newSurvey()">New Survey</button>
 <div class="row">
 <my-category
     class="col-md-6"
