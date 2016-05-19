@@ -30,6 +30,9 @@ export class QuestionnaireComponent implements OnInit {
                 private _userService: UserService){ }
 
     ngOnInit(){
+        if(!this._userService.haveUser()){
+            this._router.navigate(['/login']);
+        }
         this._questionService.getCategories()
             .subscribe(categories => this.setCategories(categories),
                        error => this.errorMessage = <any>error);

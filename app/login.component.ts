@@ -1,5 +1,5 @@
 import {User} from './user';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 
@@ -8,12 +8,19 @@ import {Router} from '@angular/router';
   templateUrl: 'templates/login.html',
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public name: string;
   public password: string;
   public errorMessage: any;
 
   constructor(private _userService: UserService, private _router: Router){ }
+
+   ngOnInit(){
+        if(this._userService.haveUser()){
+            console.log('user found routing to user');
+            this._router.navigate(['/user']);
+        }
+    }
 
   public login(){
     this._userService.login(this.name, this.password)

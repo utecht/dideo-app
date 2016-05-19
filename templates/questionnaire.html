@@ -1,9 +1,16 @@
+<form class="form-inline">
+<div class="form-group">
+<label for="survey_name">Survey Name</label>
 <input
+   id="survey_name"
+   class="form-control"
    *ngIf="survey"
    placeholder="Survey Name..."
    (blur)="saveSurvey()"
    [(ngModel)]="survey.name">
-<button type="button" class="btn" (click)="newSurvey()">New Survey</button>
+<button type="button" class="btn btn-success" (click)="newSurvey()">Next...</button>
+</div>
+</form>
 <div class="row">
 <my-category
     class="col-md-6"

@@ -6,7 +6,8 @@ import {AboutComponent} from './about.component';
 import {UserComponent} from './user.component';
 import {LoginComponent} from './login.component';
 import {UserService} from './user.service';
-
+// Until useAsDefault: true has returned
+import {NotFoundComponent} from './notfound.component';
 
 @Component({
     selector: 'cafe-app',
@@ -21,7 +22,9 @@ import {UserService} from './user.service';
     {path: '/about', component: AboutComponent},
     {path: '/user', component: UserComponent},
     {path: '/login', component: LoginComponent},
-    {path: '/questionnaire', component: QuestionnaireComponent}
+    {path: '/questionnaire', component: QuestionnaireComponent},
+    // Until useAsDefault: true has returned
+    {path: '/', component: NotFoundComponent}
 ])
 
 export class AppComponent { }

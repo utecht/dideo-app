@@ -37,7 +37,10 @@ export class QuestionDrugComponent implements OnInit{
         } else {
             this.answer = {'question': this.question.id};
         }
-        this.user = this._userService.getUser();
+        this._userService.getUser().subscribe(
+            user => this.user = user,
+            error => console.error(error)
+        );
         this.init.push({'id': null, 'text':this.answer.text});
         this.checkChebi(this.answer.text);
     }

@@ -33,7 +33,10 @@ export class QuestionAssayComponent implements OnInit, AfterViewChecked {
         } else {
             this.answer = {'question': this.question.id};
         }
-        this.user = this._userService.getUser();
+        this._userService.getUser().subscribe(
+            user => this.user = user,
+            error => console.error(error)
+        );
     }
 
     ngAfterViewChecked(){

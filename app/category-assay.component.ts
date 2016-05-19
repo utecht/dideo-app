@@ -3,6 +3,7 @@ import {Question, Category} from './question';
 import {QuestionAssayComponent} from './question-assay.component';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
+import {User} from './user';
 
 @Component({
     selector: 'my-assay-category',
@@ -17,6 +18,7 @@ export class CategoryAssayComponent implements OnChanges {
     public category: Category;
     public questions: Question[];
     public errorMessage: any;
+    public user:User;
 
     constructor(private _questionService: QuestionService,
                 private _userService: UserService){ }
@@ -24,7 +26,11 @@ export class CategoryAssayComponent implements OnChanges {
     ngOnInit(){ }
 
     ngOnChanges() {
-        this._questionService.getQuestions(this.category.id, this._userService.getUser())
+        this._userService.getUser()
+            .subscribe(
+                user => this.user = user,
+                error => this.user = null);
+        this._questionService.getQuestions(this.category.id, this.user)
             .subscribe(questions => this.questions = questions,
                        error => this.errorMessage = <any>error);
     }
