@@ -1,9 +1,9 @@
 <div *ngIf="question" [ngClass]="{disabled: question.disabled}">
-    <p class="card-text" [innerHTML]="question.text | define"></p>
-    <form [ngSwitch]="question.q_type">
+    <form [ngSwitch]="question.q_type" class="form-inline">
         <template ngSwitchWhen=text>
-          <fieldset class="form-group">
-            <input type="text" class="form-control"
+          <fieldset class="form-group row">
+            <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+            <input type="text" class="form-control col-sm-6"
                    placeholder="Text..."
                    (blur)="setValue()"
                    [disabled]="question.disabled"
@@ -12,7 +12,8 @@
           <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
         <template ngSwitchWhen=int>
-          <fieldset class="form-group">
+          <fieldset class="form-group row">
+            <label class="col-sm-6" [innerHTML]="question.text | define"></label>
             <input type="number" class="form-control"
                    placeholder="Number"
                    (blur)="setValue()"
@@ -22,8 +23,9 @@
           </fieldset>
         </template>
         <template ngSwitchWhen=combo>
-          <fieldset class="form-group">
-              <select class="form-control"
+          <fieldset class="row">
+              <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+              <select class="col-sm-6"
                   (blur)="setValue()"
                    [disabled]="question.disabled"
                   [(ngModel)]="answer.text">
@@ -35,22 +37,10 @@
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
-        <template ngSwitchWhen=drugs>
-          <fieldset class="form-group">
-              <select class="form-control chosen-select"
-                  (blur)="setValue()"
-                   [disabled]="question.disabled"
-                  [(ngModel)]="answer.text">
-                <option></option>
-                <option *ngFor="let compound of chebi" [value]="compound.chebi">
-                    {{compound.name}}
-                </option>
-            </select>
-            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
-          </fieldset>
-        </template>
         <template ngSwitchWhen=check>
-          <fieldset class="form-group">
+          <fieldset class="form-group row">
+              <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+              <div class="col-sm-6">
               <div class="checkbox" *ngFor="let option of question.options">
                   <label>
                     <input type="checkbox"
@@ -61,22 +51,28 @@
                     {{option.text}}
                 </label>
               </div>
+              </div>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
         <template ngSwitchWhen=bool>
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
-              (click)="answer.yesno=true; setValue()"
-              [disabled]="question.disabled"
-              [checked]="answer.yesno">Yes
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
-              (click)="answer.yesno=false; setValue()"
-              [disabled]="question.disabled"
-              [checked]="answer.yesno === false">No
-            </label>
+            <div class="row">
+                <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+                <div class="col-sm-6">
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                      (click)="answer.yesno=true; setValue()"
+                      [disabled]="question.disabled"
+                      [checked]="answer.yesno">Yes
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                      (click)="answer.yesno=false; setValue()"
+                      [disabled]="question.disabled"
+                      [checked]="answer.yesno === false">No
+                    </label>
+                </div>
+            </div>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
         <template ngSwitchDefault>Unknown Question Type</template>
