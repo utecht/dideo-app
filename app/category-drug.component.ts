@@ -31,15 +31,32 @@ export class CategoryDrugComponent implements OnChanges {
                 user => this.user = user,
                 error => this.user = null);
         this._questionService.getQuestions(this.category.id, this.user)
-            .subscribe(questions => this.questions = questions,
+            .subscribe(questions => this.setQuestions(questions),
                        error => this.errorMessage = <any>error);
+    }
+
+    setQuestions(questions: Question[]){
+        this.questions = questions;
+        for(let i = 0; i < questions.length; i++){
+            for(let j = 0; j < questions[i].depends_on.length; j++){
+                for(let k = 0; k < questions.length; k++){
+                    if(questions[k].id === questions[i].depends_on[j]){
+                        if(questions[k].answer){
+                            this.questions[i].disabled = (questions[k].answer.text === null);
+                        } else {
+                            this.questions[i].disabled = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     checkDeps(answer) {
         for(let i = 0; i < this.questions.length; i++){
             for(let j = 0; j < this.questions[i].depends_on.length; j++){
                 if(this.questions[i].depends_on[j] === answer.question){
-                    this.questions[i].disabled = !answer.yesno;
+                    this.questions[i].disabled = (answer.text === null);
                 }
             }
         }

@@ -1,11 +1,8 @@
 <div *ngIf="question" [ngClass]="{disabled: question.disabled}">
-    <div *ngIf="user && user.is_staff">
-        <span>#{{question.id}}</span>
-        <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="/gicon.png"></a>
-    </div>
-    <p class="card-text" [innerHTML]="question.text"></p>
     <form>
-          <fieldset class="form-group">
+          <fieldset
+              [hidden]="question.disabled"
+              class="form-group">
               <ng-select class="form-control"
                   [disabled]="question.disabled"
                   placeholder="Drug search..."
@@ -14,7 +11,6 @@
                   (selected)="setValue($event.text)"
                   [items]="items">
             </ng-select>
-            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
               (click)="answer.yesno=true; setValue()"

@@ -71,9 +71,7 @@ export class QuestionDrugComponent implements OnInit{
             this._questionService.setValue(this.answer, this.user)
                         .subscribe(res => console.log(res),
                                    error => console.error(error));
-            if(this.question.q_type === "bool"){
-                this.changed.emit(this.answer);
-            }
+            this.changed.emit(this.answer);
          } else {
              console.log("Must be logged in to submit");
          }
