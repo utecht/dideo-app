@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 @Component ({
   selector: 'my-user',
   templateUrl: 'templates/user.html',
-  styleUrls: ['css/user.css'],
+  styleUrls: ['css/user.css', 'css/mystrap.css'],
 })
 
 export class UserComponent implements OnInit {
@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
         );
         this._userService.getCurrentSurvey()
             .subscribe(survey => this.current_survey = survey.id,
-                       error => this.errorMessage = <any>error);
+                       error => console.error(error));
         this._userService.getSurveys()
             .subscribe(surveys => this.surveys = surveys,
                        error => this.errorMessage = <any>error);

@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 @Component({
     selector: 'my-questionnaire',
     templateUrl: 'templates/questionnaire.html',
-    styleUrls: ['css/questionnaire.css'],
+    styleUrls: ['css/questionnaire.css', 'css/mystrap.css'],
     directives: [CategoryComponent, CategoryDrugComponent, CategoryAssayComponent],
     providers: [QuestionService, DefinitionService, ChebiService]
 })
