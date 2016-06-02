@@ -49,7 +49,7 @@ export class QuestionnaireComponent implements OnInit {
     }
 
     downloadRDF(){
-        this.downloadWindow = window.open("RDF Processing...");
+        this.downloadWindow = window.open("/static/loading.html");
         this._userService.getRDF(this.survey.id)
             .subscribe(
                 data => this.openRDF(data),
