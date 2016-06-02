@@ -77,6 +77,21 @@ export class UserService {
                           .catch(this.handleError);
     }
 
+    private _rdfUrl = '/api/rdf_survey/';
+
+    getRDF(survey: number){
+        let headers = new Headers({'Accept': 'application/json'});
+        if(this.user){
+            headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.user.token });
+        }
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._rdfUrl + survey + '/', options)
+                            .map(res => <string> res.text())
+                            .catch(this.handleError);
+    }
+
     setUser(user: User, token: string){
         user.token = token;
         this.user = user;

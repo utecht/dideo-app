@@ -47,6 +47,20 @@ export class QuestionnaireComponent implements OnInit {
                        error => this.errorMessage = <any>error);
     }
 
+    downloadRDF(){
+        this._userService.getRDF(this.survey.id)
+            .subscribe(
+                data => this.openRDF(data),
+                error => console.error(error)
+            );
+    }
+
+    openRDF(data: string){
+        let blob = new Blob([data], { type: 'rdf/xml'})
+        let url = window.URL.createObjectURL(blob);
+        window.open(url);
+    }
+
     newSurvey(){
         this._userService.newSurvey()
             .subscribe(
