@@ -61,7 +61,6 @@ export class QuestionnaireComponent implements OnInit {
         let blob = new Blob([data], { type: 'rdf/xml'})
         let url = window.URL.createObjectURL(blob);
         this.downloadWindow.location = url;
-        this.downloadWindow.close();
     }
 
     newSurvey(){
