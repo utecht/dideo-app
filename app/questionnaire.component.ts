@@ -24,7 +24,6 @@ export class QuestionnaireComponent implements OnInit {
     public drugCategory: Category;
     public errorMessage: any;
     public survey: Survey;
-    public downloadWindow: Window;
 
     constructor(private _questionService: QuestionService,
                 private _router: Router,
@@ -49,7 +48,6 @@ export class QuestionnaireComponent implements OnInit {
     }
 
     downloadRDF(){
-        this.downloadWindow = window.open("/static/loading.html");
         this._userService.getRDF(this.survey.id)
             .subscribe(
                 data => this.openRDF(data),
@@ -60,7 +58,16 @@ export class QuestionnaireComponent implements OnInit {
     openRDF(data: string){
         let blob = new Blob([data], { type: 'rdf/xml'})
         let url = window.URL.createObjectURL(blob);
-        this.downloadWindow.location = url;
+        let a = document.createElement('a');
+        if (typeof a.download === 'undefined') {
+          window.location.href = url;
+        } else {
+            a.href = url;
+            a.style.display = "none";
+            a.download = 'survey' + this.survey.id + '.xml';
+            document.body.appendChild(a);
+            a.click();
+        }
     }
 
     newSurvey(){
