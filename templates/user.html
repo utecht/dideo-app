@@ -1,6 +1,6 @@
 <div *ngIf="errorMessage">{{errorMessage}}</div>
 <div *ngIf="user">
-  <button type="button" class="btn btn-success" (click)="newSurvey()">New Survey</button>
+  <button type="button" class="btn btn-success" (click)="newSurvey()">New Evidence Item</button>
   <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
   <ul>
       <li *ngFor="let survey of surveys">
