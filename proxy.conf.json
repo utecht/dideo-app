@@ -1,0 +1,12 @@
+{
+  "/api": {
+    "target": "https://dideo.cafe-trauma.com",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/rdf": {
+    "target": "https://dideo.cafe-trauma.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

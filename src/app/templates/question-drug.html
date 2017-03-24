@@ -1,0 +1,27 @@
+<div *ngIf="question" [ngClass]="{disabled: !question.enabled}">
+    <form>
+          <fieldset
+              [hidden]="!question.enabled"
+              class="form-group">
+              <select class="form-control"
+                  [disabled]="question.disabled"
+                  placeholder="Drug search..."
+                  (typed)="checkChebi($event)"
+                  (selected)="setValue($event.text)"
+                  ng-options="option.name for option in items track by option.accession">
+            </select>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
+              (click)="answer.yesno=true; setValue()"
+              [disabled]="!question.enabled"
+              [checked]="answer.yesno">Object
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
+              (click)="answer.yesno=false; setValue()"
+              [disabled]="!question.enabled"
+              [checked]="answer.yesno === false">Precipitant
+            </label>
+          </fieldset>
+    </form>
+</div>

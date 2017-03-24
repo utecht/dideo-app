@@ -1,0 +1,28 @@
+<form class="form-inline">
+<div class="form-group">
+<label for="survey_name">Evidence Item Name</label>
+<input
+   id="survey_name"
+   class="form-control"
+   *ngIf="survey"
+   placeholder="Survey Name..."
+   (blur)="saveSurvey()"
+   name="surveyName"
+   [(ngModel)]="survey.name">
+<button type="button" class="btn btn-success" (click)="newSurvey()">Next...</button>
+<button type="button" class="btn btn-info" (click)="downloadRDF()">RDF</button>
+</div>
+</form>
+<div class="row">
+<my-category
+    class="col-md-6"
+    *ngIf="trialCategory"
+    [category]="trialCategory"></my-category>
+<my-drug-category
+    class="col-md-6"
+    *ngIf="drugCategory"
+    [category]="drugCategory"></my-drug-category>
+</div>
+<my-assay-category
+    *ngIf="assayCategory"
+    [category]="assayCategory"></my-assay-category>

@@ -1,0 +1,28 @@
+<div class="assay" *ngIf="question" [ngClass]="{disabled: question.enabled === false}">
+    <span class="card-text" [innerHTML]="question.text"></span>
+    <form [ngSwitch]="question.q_type">
+        <div *ngSwitchCase="'text'">
+          <fieldset class="form-group">
+            <input type="text" class="form-control"
+                   placeholder="Text..."
+                   (blur)="setValue()"
+                   [disabled]="question.enabled === false"
+                   name="question.id"
+                   [(ngModel)]="answer.text">
+          </fieldset>
+          <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+      </div>
+        <div *ngSwitchCase="'int'">
+          <fieldset class="form-group">
+            <input type="number" class="form-control"
+                   placeholder="Number"
+                   (blur)="setValue()"
+                   name="question.id"
+                   [disabled]="question.enabled === false"
+                   [(ngModel)]="answer.integer">
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+          </fieldset>
+      </div>
+        <ng-template ngSwitchDefault>Unknown Question Type</ng-template>
+    </form>
+</div>

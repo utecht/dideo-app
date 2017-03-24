@@ -1,0 +1,6 @@
+<div *ngIf="errorMessage">{{errorMessage}}</div>
+<form class="form-inline">
+  <input type="text" name="name" placeholder="Username" class="form-control" [(ngModel)]="name">
+  <input type="password" name="password" placeholder="Password" class="form-control" [(ngModel)]="password">
+  <button type="submit" class="btn" (click)="login()">Login</button>
+</form>

@@ -1,0 +1,77 @@
+<div *ngIf="question" [@visibilityChanged]="visibility">
+    <form [ngSwitch]="question.q_type" class="form-inline">
+        <div *ngSwitchCase="'text'">
+          <fieldset class="form-group row">
+            <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+            <input type="text" class="form-control col-sm-6"
+                   placeholder="Text..."
+                   (blur)="setValue()"
+                   name="question.id"
+                   [(ngModel)]="answer.text">
+          </fieldset>
+          <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+        </div>
+        <div *ngSwitchCase="'int'">
+          <fieldset class="form-group row">
+            <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+            <input type="number" class="form-control"
+                   placeholder="Number"
+                   (blur)="setValue()"
+                   name="question.id"
+                   [(ngModel)]="answer.integer">
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+          </fieldset>
+        </div>
+        <div *ngSwitchCase="'combo'">
+          <fieldset class="row">
+              <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+              <select class="col-sm-6"
+                  (blur)="setValue()"
+                   name="question.id"
+                  [(ngModel)]="answer.text">
+                <option></option>
+                <option *ngFor="let option of question.options" [value]="option.text">
+                    {{option.text}}
+                </option>
+            </select>
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+          </fieldset>
+        </div>
+        <div *ngSwitchCase="'check'">
+          <fieldset class="form-group row">
+              <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+              <div class="col-sm-6">
+              <div class="checkbox" *ngFor="let option of question.options">
+                  <label>
+                    <input type="checkbox"
+                    (click)="setCheck(option.id)"
+                    [checked]="isChecked(option.id)"
+                    [value]="option.id"
+                    {{option.text}}
+                </label>
+              </div>
+              </div>
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+          </fieldset>
+        </div>
+        <div *ngSwitchCase="'bool'">
+            <div class="row">
+                <label class="col-sm-6" [innerHTML]="question.text | define"></label>
+                <div class="col-sm-6">
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                      (click)="answer.yesno=true; setValue()"
+                      [checked]="answer.yesno">Yes
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                      (click)="answer.yesno=false; setValue()"
+                      [checked]="answer.yesno === false">No
+                    </label>
+                </div>
+            </div>
+            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+        </div>
+        <ng-template ngSwitchDefault>Unknown Question Type</ng-template>
+    </form>
+</div>
