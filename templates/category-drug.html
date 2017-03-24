@@ -1,7 +1,0 @@
-<div *ngIf="errorMessage">{{errorMessage}}</div>
-<div *ngIf="category" class="questions">
-    <h3>Drugs</h3>
-    <div *ngFor="let question of questions">
-        <my-drug (changed)="checkDeps($event)" [question]="question"></my-drug>
-    </div>
-</div>

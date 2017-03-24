@@ -15,7 +15,7 @@ declare var jQuery:any;
     outputs: ['changed'],
 })
 
-export class QuestionAssayComponent implements OnInit, AfterViewChecked {
+export class QuestionAssayComponent implements OnInit {
     public question: Question;
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
@@ -35,10 +35,6 @@ export class QuestionAssayComponent implements OnInit, AfterViewChecked {
             user => this.user = user,
             error => console.error(error)
         );
-    }
-
-    ngAfterViewChecked(){
-        jQuery('[data-toggle="popover"]').popover();
     }
 
     setCheck(id: number){
