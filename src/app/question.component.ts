@@ -78,9 +78,9 @@ export class QuestionComponent implements OnInit {
         if(this.user){
             this.answer.question = this.question.id;
             this._questionService.setValue(this.answer, this.user)
-                        .subscribe(res => console.log(res),
+                        .subscribe(res => {console.log(res),
+                                           this.changed.emit(this.answer)},
                                    error => console.error(error));
-            this.changed.emit(this.answer);
          } else {
              console.log("Must be logged in to submit");
          }
