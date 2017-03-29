@@ -5,7 +5,6 @@ import {Chebi} from './chebi';
 import {QuestionService} from './question.service';
 import {ChebiService} from './chebi.service';
 import {UserService} from './user.service';
-import {DefinitionPipe} from './definition.pipe';
 
 @Component({
     selector: 'my-drug',

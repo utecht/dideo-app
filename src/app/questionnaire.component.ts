@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
-import {DefinitionService} from './definition.service';
 import {ChebiService} from './chebi.service';
 import {Category, Survey} from './question';
 import {Router} from '@angular/router';

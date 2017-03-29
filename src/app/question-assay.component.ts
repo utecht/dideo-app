@@ -2,7 +2,6 @@ import {Component, OnInit, AfterViewChecked, EventEmitter} from '@angular/core';
 import {Question, Answer} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';
-import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
 
 declare var jQuery:any;
@@ -22,7 +21,6 @@ export class QuestionAssayComponent implements OnInit {
     public user: User;
 
     constructor(private _questionService: QuestionService,
-                private _definitionService: DefinitionService,
                 private _userService: UserService) { }
 
     ngOnInit(){

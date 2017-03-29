@@ -5,7 +5,6 @@ import {
 import {Question, Answer} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';
-import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
 
 declare var jQuery:any;
@@ -20,11 +19,11 @@ declare var jQuery:any;
         trigger('visibilityChanged', [
             state('true', style({ opacity: 1, display: 'inline'})),
             state('false', style({ opacity: 0, display: 'none'})),
-            transition('void <=> true', animate('.5s', keyframes([
+            transition('* <=> true', animate('.5s', keyframes([
                 style({opacity: 0, display: 'inline', offset: 0}),
                 style({opacity: 1, display: 'inline', offset: 1}),
             ]))),
-            transition('void <=> false', animate('.5s', keyframes([
+            transition('* <=> false', animate('0s', keyframes([
                 style({opacity: 1, display: 'inline', offset: 0}),
                 style({opacity: 0, display: 'inline', offset: 1}),
             ]))),
@@ -42,15 +41,10 @@ export class QuestionComponent implements OnInit {
 
 
     constructor(private _questionService: QuestionService,
-                private _definitionService: DefinitionService,
                 private _userService: UserService) { }
 
     ngOnInit(){
-        if(this.question.old){
-            this.visibility = String(this.question.enabled);
-        } else {
-            this.visibility = 'new';
-        }
+        this.visibility = String(this.question.enabled);
         if(this.question.answer){
             this.answer = this.question.answer;
         } else {
@@ -86,9 +80,7 @@ export class QuestionComponent implements OnInit {
             this._questionService.setValue(this.answer, this.user)
                         .subscribe(res => console.log(res),
                                    error => console.error(error));
-            if(this.question.q_type === "bool"){
-                this.changed.emit(this.answer);
-            }
+            this.changed.emit(this.answer);
          } else {
              console.log("Must be logged in to submit");
          }

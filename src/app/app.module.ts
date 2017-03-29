@@ -18,10 +18,8 @@ import { CategoryDrugComponent } from './category-drug.component';
 import { QuestionComponent } from './question.component';
 import { QuestionDrugComponent } from './question-drug.component';
 import { QuestionAssayComponent } from './question-assay.component';
-import { DefinitionPipe } from './definition.pipe';
 import { UserService } from './user.service';
 import { QuestionService } from './question.service';
-import { DefinitionService } from './definition.service';
 import { ChebiService } from './chebi.service';
 
 @NgModule({
@@ -45,13 +43,11 @@ import { ChebiService } from './chebi.service';
     LoginComponent,
     NotFoundComponent,
     AppComponent,
-    DefinitionPipe,
   ],
   providers: [
     appRoutingProviders,
     UserService,
     QuestionService,
-    DefinitionService,
     ChebiService,
   ],
   bootstrap: [ AppComponent ]

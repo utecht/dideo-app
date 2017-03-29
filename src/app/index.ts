@@ -5,8 +5,6 @@ export * from './app.routing';
 export * from './category.component';
 export * from './category-assay.component';
 export * from './category-drug.component';
-export * from './definition.pipe';
-export * from './definition.service';
 export * from './login.component';
 export * from './notfound.component';
 export * from './question.component';
