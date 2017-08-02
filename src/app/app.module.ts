@@ -21,6 +21,7 @@ import { QuestionAssayComponent } from './question-assay.component';
 import { UserService } from './user.service';
 import { QuestionService } from './question.service';
 import { ChebiService } from './chebi.service';
+import { Select2Component } from 'select2-component/angular';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { ChebiService } from './chebi.service';
     LoginComponent,
     NotFoundComponent,
     AppComponent,
+    Select2Component,
   ],
   providers: [
     appRoutingProviders,

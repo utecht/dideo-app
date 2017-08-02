@@ -5,6 +5,7 @@ import {Chebi} from './chebi';
 import {QuestionService} from './question.service';
 import {ChebiService} from './chebi.service';
 import {UserService} from './user.service';
+import {Select2Option, Select2Value} from 'select2-component/angular';
 
 @Component({
     selector: 'my-drug',
@@ -21,8 +22,10 @@ export class QuestionDrugComponent implements OnInit{
     public user: User;
     public search: string;
     public chebi: Chebi[];
-    public items: Array<any> = [];
-    public init: Array<any> = [];
+    public items: Select2Option[] = [{value: null,
+                                      label: 'Chebi Search...',
+                                      disabled: true}];
+    public select_value: Select2Value;
 
     constructor(private _questionService: QuestionService,
                 private _chebiService: ChebiService,
@@ -31,6 +34,9 @@ export class QuestionDrugComponent implements OnInit{
     ngOnInit(){
         if(this.question.answer){
             this.answer = this.question.answer;
+            this.select_value = this.question.answer.text;
+            this.items = [{value: this.question.answer.text,
+                           label: this.question.answer.text}];
         } else {
             this.answer = {'question': this.question.id};
         }
@@ -38,8 +44,6 @@ export class QuestionDrugComponent implements OnInit{
             user => this.user = user,
             error => console.error(error)
         );
-        this.init.push({'id': null, 'text':this.answer.text});
-        this.checkChebi(this.answer.text);
     }
 
     checkChebi(partial: string){
@@ -55,8 +59,8 @@ export class QuestionDrugComponent implements OnInit{
         this.items = [];
         this.chebi.forEach((compound: Chebi) => {
             this.items.push({
-                id: compound.accession,
-                text: compound.name
+                value: compound.accession,
+                label: compound.accession + ' ' + compound.name
             });
         });
     }
